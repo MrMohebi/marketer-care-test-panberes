@@ -66,7 +66,7 @@ const IndexPage = () => {
                 <div className={'container IranSans'}>
                     <ul className={'float-left'}>
                         <li className={'ml-3'}>
-                            <a href="/login">ورود</a>
+                            <a href="#">ورود</a>
                             <i className="fas fa-user ml-2"/>
                         </li>
                         <li className={'ml-3'}>
@@ -173,7 +173,7 @@ const IndexPage = () => {
                                 </div>
                                 <div
                                     className={'manual-submit d-flex flex-row-reverse mb-4 justify-content-between align-items-center mt-4'}>
-                                    <button className={'btn btn-primary submit'}>
+                                    <button className={'btn btn-primary submit d-flex'}>
                                         <i className={'fa fa-check ml-2'}/>
                                         ثبت نام
                                     </button>
@@ -214,15 +214,10 @@ const IndexPage = () => {
 
                                 })
                             }
-
-
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
     )
 }
