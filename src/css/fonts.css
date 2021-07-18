@@ -1,0 +1,13 @@
+@font-face {
+    font-family: IranSans;
+    src: url("../assets/fonts/IRANSansMobile.ttf") format("truetype");
+}
+.IranSans{
+    font-family: IranSans, serif;
+}@font-face {
+    font-family: IranSansLight;
+    src: url("../assets/fonts/IRANSansMobile_Light.ttf") format("truetype");
+}
+.IranSansLight{
+    font-family: IranSansLight, serif;
+}
