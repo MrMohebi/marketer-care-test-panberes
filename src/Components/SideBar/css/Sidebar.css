@@ -1,0 +1,27 @@
+.side-bar-main-container{
+    width: 235px;
+    height: calc(100% - 50px);
+    background-color: #0a2346;
+    float: right;
+}
+.nav-icons{
+    color: #c2c9c9;
+    width: 50px;
+    height: 40px;
+    /*border-left: 1px solid rgba(255,255,255,0.3);*/
+    text-align: center;
+
+    line-height: 1rem;
+}
+.nav-items{
+    color: #c2c9c9;
+    padding-top: 10px;
+    height: 40px;
+    font-size: 0.9rem;
+
+}
+.nav-items-container{
+    height: 40px;
+
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
