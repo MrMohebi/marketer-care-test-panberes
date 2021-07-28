@@ -4,20 +4,18 @@ import '../../assets/resetCss/reset.css'
 import './css/login.css'
 import '../../assets/bootstrap/css/bootstrap.min.css'
 import '../../assets/fonts/fonts.css'
-// import '../assets/FA/css/all.css'
-import '@fortawesome/fontawesome-free/css/all.css';
+import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/dist/backdrop.css';
 import 'tippy.js/animations/shift-away.css';
 import 'tippy.js/animations/scale-subtle.css';
+// import '../assets/FA/css/all.css'
+import '@fortawesome/fontawesome-free/css/all.css';
 //js
 import tippy from 'tippy.js';
 import {useEffect} from "react";
-
-import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
 import {utils} from '@hassanmojab/react-modern-calendar-datepicker';
-
 // markup
 const IndexPage = () => {
     let [day, sday] = React.useState(null)
@@ -51,6 +49,10 @@ const IndexPage = () => {
 
     ]
     useEffect(() => {
+        setInterval(()=>{
+            let a = document.querySelector('.DatePicker__calendarContainer')
+            console.log(a?a.children:a)
+        },1000)
         tippy('[data-tippy-content]', {
             animation: 'scale-subtle',
             arrow: true,
@@ -79,11 +81,11 @@ const IndexPage = () => {
                 </div>
             </div>
 
-            <div className={' main-container d-flex justify-content-center '}>
+            <div className={'main-container d-flex justify-content-center '}>
                 <div className={'container'}>
                     <div className={'container-inner w-100 d-flex justify-content-center align-items-center'}>
                         <div className={' left-side  d-flex justify-content-center align-items-center'}>
-                            <div className={'LS-form d-flex flex-column'}>
+                            <div className={'LS-form mt-3 d-flex flex-column'}>
                                 <div className={' LS-form-header'}>
                                     <img style={{width:'80%'}} src={`/img/logo.png`} alt=""/>
                                 </div>
@@ -109,14 +111,14 @@ const IndexPage = () => {
                                     <div className={'row mb-4'}>
                                         <div className={'col-md-6'}>
                                             <label>
-                                                <i className={'ico-append fa fa-user'}/>
+                                                <i className={'ico-append fa fa-mail-bulk'}/>
                                                 <input type={'text'} data-tippy-content={'کد ملی شما'}
                                                        placeholder={"کد ملی *"}/>
                                             </label>
                                         </div>
                                         <div className={'col-md-6'}>
                                             <label>
-                                                <i className={'ico-append fa fa-user'}/>
+                                                <i className={'ico-append fa fa-phone'}/>
                                                 <input type={'text'} data-tippy-content={'شماره موبایل شما'}
                                                        placeholder={"شماره موبایل *"}/>
                                             </label>
@@ -126,10 +128,12 @@ const IndexPage = () => {
                                     <div className={'row mb-4'}>
                                         <div className={'col-md-6'}>
                                             <label>
-                                                <i className={'z-9999 ico-append fa fa-user'}/>
+                                                <i className={'z-9999 ico-append fa fa-calendar'}/>
                                                 <DatePicker
+
                                                     value={day}
-                                                    calendarPopperPosition={'bottom'}
+                                                    calendarClassName={'responsive-calendar'}
+                                                    calendarPopperPosition={'top'}
                                                     onChange={(e) => {
                                                         sday(e)
                                                         console.log(e)
@@ -144,7 +148,7 @@ const IndexPage = () => {
                                         </div>
                                         <div className={'col-md-6'}>
                                             <label>
-                                                <i className={'ico-append fa fa-user'}/>
+                                                <i className={'ico-append fa fa-mail-bulk'}/>
                                                 <input type={'text'} data-tippy-content={'کد ملی معرف'}
                                                        placeholder={"کد ملی معرف *"}/>
                                             </label>
@@ -154,7 +158,7 @@ const IndexPage = () => {
                                     <div className={'row mb-4'}>
                                         <div className={'col-md-6'}>
                                             <label>
-                                                <i className={'ico-append fa fa-user'}/>
+                                                <i className={'ico-append fa fa-lock'}/>
                                                 <input type={'text'}
                                                        data-tippy-content={'حد اقل 9 حرف (اینگلیسی و اعداد)'}
                                                        placeholder={"کلمه عبور *"}/>
@@ -162,9 +166,9 @@ const IndexPage = () => {
                                         </div>
                                         <div className={'col-md-6'}>
                                             <label>
-                                                <i className={'ico-append fa fa-user'}/>
-                                                <input type={'text'} data-tippy-content={'شماره موبایل شما'}
-                                                       placeholder={"شماره موبایل *"}/>
+                                                <i className={'ico-append fa fa-lock'}/>
+                                                <input type={'text'} data-tippy-content={'تکرار کلمه عبور'}
+                                                       placeholder={"تکرار کلمه عبور *"}/>
                                             </label>
                                         </div>
                                     </div>
@@ -198,9 +202,9 @@ const IndexPage = () => {
                                     return (
                                         <div style={{direction: 'rtl'}}
                                              className={'info-block d-flex align-items-center '}>
-                                            <i className={eachOption['FAClass'] + ' ml-3'}/>
+                                            <i style={{fontSize:'1.8rem'}} className={eachOption['FAClass'] + ' ml-3'}/>
                                             <div className={'text-right d-flex flex-column '}>
-                                                <h4 className={'info-block-title IranSans pt-4'}>
+                                                <h4 className={'info-block-title IranSans pt-1'}>
                                                     {eachOption['title']}
                                                 </h4>
                                                 <p className={'info-block-details IranSansLight'}>

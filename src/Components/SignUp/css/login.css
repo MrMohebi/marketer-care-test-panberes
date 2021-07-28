@@ -80,6 +80,7 @@ label i {
   z-index: 9999;
 }
 .LS-form-body .DatePicker {
+  background-color: #fff !important;
   width: 100%;
   font-family: IranSans;
   direction: rtl;
@@ -109,6 +110,10 @@ label i {
   padding: 10px 20px;
 }
 
+.testclass {
+  font-size: 555px;
+}
+
 .right-side i {
   color: #C9D92C;
   font-size: 38px;
@@ -121,10 +126,6 @@ label i {
 
 .info-block-details {
   color: white;
-}
-
-.container-inner {
-  margin-top: 5rem;
 }
 
 @media only screen and (max-width: 850px) {
@@ -158,6 +159,14 @@ label i {
   .right-side p {
     text-align: center;
   }
+}
+.DatePicker__calendarContainer {
+  background-color: #fff !important;
+  position: fixed !important;
+  top: 20% !important;
+  left: 50% !important;
+  z-index: 999999 !important;
+  transform: scale(1) translate(-50%, -100%) !important;
 }
 
 /*# sourceMappingURL=login.css.map */
