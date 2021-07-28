@@ -59,7 +59,7 @@ const IndexPage = () => {
         })
     }, [])
     return (
-        <div className={'h-100 w-100'}>
+        <div className={'w-100'}>
 
             <div className={'header d-flex align-items-center'}>
                 <div className={'container IranSans'}>
@@ -85,7 +85,7 @@ const IndexPage = () => {
                         <div className={' left-side  d-flex justify-content-center align-items-center'}>
                             <div className={'LS-form d-flex flex-column'}>
                                 <div className={' LS-form-header'}>
-                                    <img src={`/img/logo.png`} alt=""/>
+                                    <img style={{width:'80%'}} src={`/img/logo.png`} alt=""/>
                                 </div>
                                 <div className={'LS-form-body mt-4 '}>
 
