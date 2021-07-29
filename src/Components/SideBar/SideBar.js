@@ -161,64 +161,6 @@ const SideBar = () => {
 
                     })
                 }
-                {/*<div className={'d-flex nav-items-container justify-content-end'}>*/}
-                {/*    <span className={'nav-items mr-2'}>میز کار شما</span>*/}
-                {/*    <div className={'nav-icons d-flex justify-content-center align-items-center'}>*/}
-                {/*        <i className={'fas fa-home'}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                {/*<div className={'d-flex nav-items-container justify-content-end'}>*/}
-
-                {/*    <div className={'d-flex flex-row'}>*/}
-                {/*        <span className={'nav-items mr-2'}>مشخصات فردی</span>*/}
-                {/*        <div className={'nav-icons d-flex justify-content-center align-items-center'}>*/}
-                {/*            <i className={'fa fa-edit'}/>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                {/*<div className={'d-flex nav-items-container justify-content-end'}>*/}
-                {/*    <span className={'nav-items mr-2'}>ژنولوژی</span>*/}
-                {/*    <div className={'nav-icons d-flex justify-content-center align-items-center'}>*/}
-                {/*        <i className={'fa fa-tree '}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-
-                {/*<div>*/}
-                {/*    <div className={'w-100 d-flex nav-items-container justify-content-between'}>*/}
-                {/*        <div className={'d-flex justify-content-center align-items-center ml-3'}>*/}
-                {/*            <i style={{color: '#acadad'}} className="far fa-plus-square "/>*/}
-                {/*        </div>*/}
-                {/*        <div className={'d-flex flex-row'}>*/}
-                {/*            <span className={'nav-items mr-2'}>مشتریان</span>*/}
-                {/*            <div className={'nav-icons d-flex justify-content-center align-items-center'}>*/}
-                {/*                <i className={'fa fa-user'}/>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-
-                {/*    <div className={'subnet-nav subnet-hide'}>*/}
-                {/*        <ul className={'nav-items-subnet-item'} dir={'rtl'}>*/}
-                {/*            <li className={'text-right d-flex align-items-center nav-items-subnet-item-inner '} style={{paddingRight:40,height:30,color:'#c2c9c9'}}>*/}
-                {/*                <span style={{fontSize:'0.8rem'}}> لیست مشتریان</span>*/}
-                {/*            </li>*/}
-                {/*            <li className={'text-right d-flex align-items-center nav-items-subnet-item-inner '} style={{paddingRight:40,height:30,color:'#c2c9c9'}}>*/}
-                {/*                <span style={{fontSize:'0.8rem'}}> لیست مشتریان</span>*/}
-                {/*            </li>*/}
-                {/*        </ul>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-
-                {/*<div className={'d-flex nav-items-container justify-content-between'}>*/}
-                {/*    <div className={'d-flex justify-content-center align-items-center ml-3'}>*/}
-                {/*        <i style={{color: '#acadad'}} className="far fa-plus-square "/>*/}
-                {/*    </div>*/}
-                {/*    <div className={'d-flex flex-row'}>*/}
-                {/*        <span className={'nav-items mr-2'}>مشخصات فردی</span>*/}
-                {/*        <div className={'nav-icons d-flex justify-content-center align-items-center'}>*/}
-                {/*            <i className={'fa fa-edit'}/>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
 
             </div>
         );
