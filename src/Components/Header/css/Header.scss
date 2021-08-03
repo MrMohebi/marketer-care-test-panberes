@@ -1,7 +1,12 @@
 .main-header{
   background-color: #0a2346;
   height: 50px;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
+
 .header-sides{
   height: 50px;
 }
@@ -31,4 +36,24 @@
   height: 50px;
   border-left: 1px solid rgba(255,255,255,0.2);
   float: right;
+}
+@media all  and (max-width: 400px){
+  .logo-panel{
+    display: none;
+  }
+  .main-header{
+    justify-content: space-between !important;
+  }
+  .right-side-header{
+    width: 50px !important;
+  }
+  .left-side-header{
+    width: auto !important;
+  }
+  .user-name-panel {
+    &:after{
+      display: none;
+    }
+  }
+
 }

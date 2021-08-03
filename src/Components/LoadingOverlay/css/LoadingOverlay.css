@@ -1,0 +1,14 @@
+.loading-overlay-main-container {
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  overflow: hidden;
+  display: flex;
+}
+
+.overlay-cancel-button {
+  width: 100px;
+}
+
+/*# sourceMappingURL=LoadingOverlay.css.map */

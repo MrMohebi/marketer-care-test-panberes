@@ -1,0 +1,119 @@
+.main-component-container {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  max-height: calc(100vh - 50px);
+}
+
+.urls-container {
+  background-color: #fff;
+}
+
+.inner-container {
+  background-color: #fff;
+}
+
+.link-label {
+  color: green;
+  text-align: right;
+}
+
+.user-info-label-holder {
+  font-family: IranSans, sans-serif;
+  color: #3f3f3f;
+}
+
+.user-info-edit-input-container {
+  font-family: IranSans, sans-serif;
+  margin-top: 20px;
+}
+
+.user-info-edit-input-container .DatePicker {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+.user-info-edit-input-container input {
+  transition: 0.4s ease;
+  border: solid 2px #bdbdbd;
+  border-radius: 2px;
+  outline: none;
+  text-align: right;
+  padding: 5px 5px;
+  direction: rtl;
+  width: 100%;
+}
+.user-info-edit-input-container input:focus {
+  border: solid 2px #77b6f1;
+}
+
+.user-info-edit-input {
+  transition: 0.4s ease;
+  border: solid 2px #bdbdbd;
+  border-radius: 5px;
+  outline: none;
+  text-align: right;
+  padding: 5px 5px;
+  direction: rtl;
+}
+.user-info-edit-input:focus {
+  border: solid 2px #77b6f1;
+}
+
+.user-info-edit-label {
+  white-space: nowrap;
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 8px 0 0 0;
+  margin-left: 2rem;
+  width: 50px;
+}
+
+.url-box {
+  display: flex;
+  flex-flow: row-reverse;
+  border: dashed 2px green;
+}
+
+.url-link {
+  transition: 0.3s ease;
+  border: 2px #b9b9b9 solid;
+  padding: 10px 5px 5px 5px;
+  border-radius: 5px;
+  margin: 20px 10px;
+  width: 70%;
+  text-align: center;
+  outline: none;
+  font-family: IranSans, serif;
+  line-height: 1.5rem;
+}
+.url-link::selection {
+  background-color: #189ca6;
+  color: white;
+}
+.url-link:focus {
+  border: 2px #96b5d7 solid;
+}
+
+.costumers-table:first-of-type {
+  border-bottom: #dadada 2px solid;
+}
+.costumers-table td {
+  font-size: 0.9rem;
+  text-align: center;
+  font-family: IranSans;
+}
+
+@media all and (max-width: 500px) {
+  .url-box {
+    border: dashed 2px green;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .url-link {
+    width: 95%;
+  }
+}
+
+/*# sourceMappingURL=mainPanel.css.map */

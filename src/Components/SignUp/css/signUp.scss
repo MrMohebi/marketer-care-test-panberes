@@ -31,6 +31,7 @@
 
 .LS-form {
   max-height: 70%;
+  min-width: 350px;
   width: 90%;
   background-color: white;
   border-radius: 25px;
@@ -93,7 +94,7 @@ label {
   .DatePicker {
     background-color: #fff !important;
     width: 100%;
-    font-family: IranSans;
+    font-family: IranSans, serif;
     direction: rtl;
 
     input {
@@ -114,6 +115,9 @@ label {
   width: 90%;
   margin: auto;
   text-align: center;
+}
+.form-img{
+  width: 80%;
 }
 
 .submit {
@@ -145,9 +149,12 @@ font-size: 555px
 
 
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 950px) {
   .left-side {
     width: 100% !important;
+  }
+  .form-img{
+    width: 50%;
   }
   .LS-form {
     width: 100% !important;

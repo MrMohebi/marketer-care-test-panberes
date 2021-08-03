@@ -27,6 +27,7 @@
 
 .LS-form {
   max-height: 70%;
+  min-width: 350px;
   width: 90%;
   background-color: white;
   border-radius: 25px;
@@ -82,7 +83,7 @@ label i {
 .LS-form-body .DatePicker {
   background-color: #fff !important;
   width: 100%;
-  font-family: IranSans;
+  font-family: IranSans, serif;
   direction: rtl;
 }
 .LS-form-body .DatePicker input {
@@ -100,6 +101,10 @@ label i {
   width: 90%;
   margin: auto;
   text-align: center;
+}
+
+.form-img {
+  width: 80%;
 }
 
 .submit {
@@ -128,9 +133,13 @@ label i {
   color: white;
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 950px) {
   .left-side {
     width: 100% !important;
+  }
+
+  .form-img {
+    width: 50%;
   }
 
   .LS-form {
@@ -169,4 +178,4 @@ label i {
   transform: scale(1) translate(-50%, -100%) !important;
 }
 
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=signUp.css.map */
