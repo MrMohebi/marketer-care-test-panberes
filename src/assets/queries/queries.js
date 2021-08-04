@@ -13,16 +13,18 @@ query{
     name
   }
 }`
-    $.ajax({
-        url: API_URL,
-        contentType: 'application/json',
-        type: 'POST',
-        data: JSON.stringify({
-            query: query
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: 'POST',
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            callBackFunction(res)
         })
-    }).then((res) => {
-        callBackFunction(res)
-    })
+
+
 }
 
 let getUserData = (token, callbackFunction) => {
@@ -96,15 +98,21 @@ mutation{
   }
 }
 `
-    $.ajax({
-        url: API_URL,
-        contentType: 'application/json',
-        type: "POST",
-        data: JSON.stringify({
-            query: query
+    try {
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            callback(res)
         })
-    }).then((res) => {
-        callback(res)
-    })
+    }catch (e){
+        console.log(e)
+    }
+
+
 }
 export {loginQuery, getUserData, changeUserInfo,signUp}

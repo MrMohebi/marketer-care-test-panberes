@@ -12,7 +12,7 @@ const SideBar = (props) => {
                 component: 0
             },
             {
-                title: 'مشخصات قردی',
+                title: 'مشخصات فردی',
                 iconClass: 'fa fa-edit',
                 component: 1
             },
@@ -75,25 +75,28 @@ const SideBar = (props) => {
             },
 
         ]
-    let changeComponentTransition = (newComponent)=>{
-    gsap.to(document.querySelector('.side-bar-and-main-container').firstChild,{
-        opacity:0,
-        duration:0.3,
-        ease:'power3.out',
-        onComplete:()=>{
-            props.setCurrentComponent(newComponent)
-        gsap.to(document.querySelector('.side-bar-and-main-container').firstChild,{
-            opacity:1,
-            duration:0.3,
-            ease:'power3.out',
 
 
-        })
+
+
+        let changeComponentTransition = (newComponent) => {
+            gsap.to(document.querySelector('.side-bar-and-main-container').firstChild, {
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power3.out',
+                onComplete: () => {
+                    props.setCurrentComponent(newComponent)
+                    gsap.to(document.querySelector('.side-bar-and-main-container').firstChild, {
+                        opacity: 1,
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    })
+                }
+            })
         }
-    })
-    }
 
         let handleItemWithSubnetClick = (subnet) => {
+            props.setSidebarOpen(true)
             let a = document.getElementById('subnet-nav' + subnet.currentTarget.getAttribute('id'))
             if (subnet.currentTarget.classList.contains('side-bar-item')) {
                 if (!a.classList.contains('subnet-active')) {
@@ -150,7 +153,6 @@ const SideBar = (props) => {
                                                             style={{paddingRight: 40, height: 30, color: '#c2c9c9'}}>
                                                             <button onClick={() => {
                                                                 changeComponentTransition(eachSideBarItem[eachSubnet[1]])
-                                                                // props.setCurrentComponent(eachSideBarItem['component'])
                                                             }} style={{
                                                                 textDecoration: 'none',
                                                                 color: '#c2c9c9',
@@ -171,13 +173,12 @@ const SideBar = (props) => {
                             )
                         } else {
                             return (
-                                <button style={{display:'contents'}} onClick={() => {
+                                <button style={{display: 'contents'}} onClick={() => {
                                     changeComponentTransition(eachSideBarItem['component'])
-                                    // props.setCurrentComponent(eachSideBarItem['component'])
                                 }}>
                                     <div className={'d-flex nav-items-container justify-content-end'}
                                          style={{cursor: 'pointer'}}>
-                                        <button  style={{display: 'contents', textDecoration: 'none'}}>
+                                        <button style={{display: 'contents', textDecoration: 'none'}}>
                                             <span className={'nav-items mr-2'}>{eachSideBarItem.title}</span>
                                         </button>
                                         <div className={'nav-icons d-flex justify-content-center align-items-center'}>
@@ -185,7 +186,6 @@ const SideBar = (props) => {
                                         </div>
                                     </div>
                                 </button>
-
                             )
                         }
 

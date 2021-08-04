@@ -46,7 +46,7 @@ const MainPage = () => {
                     }
                 </div>
 
-                <SideBar open={sideBarOpen} setCurrentComponent={setCurrentComponent} components={components}/>
+                <SideBar open={sideBarOpen} setSidebarOpen={setSideBarOpen} setCurrentComponent={setCurrentComponent} components={components}/>
             </div>
 
         </div>
