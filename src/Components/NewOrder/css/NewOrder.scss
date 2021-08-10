@@ -1,0 +1,32 @@
+.main-n-o-container{
+  background-color: #fff;
+}
+.priceHolder{
+  max-height: 0;
+  transition: .3s ease;
+}
+.main-n-o-container{
+  input{
+    width: 100%;
+  }
+  div.DatePicker{
+    margin-top: 0.5rem;
+    width: 100%;
+    font-family: IranSans,serif;
+    input{
+      padding-top: 10px;
+    }
+  }
+  .DatePicker__input{
+    transition: .4s ease;
+    border: solid 2px #bdbdbd;
+    border-radius: 5px;
+    outline: none;
+    text-align: right;
+    padding: 5px 5px;
+    direction: rtl;
+
+    &:focus {
+      border: solid 2px #77b6f1;
+    }  }
+}

@@ -1,0 +1,34 @@
+.main-n-o-container {
+  background-color: #fff;
+}
+
+.priceHolder {
+  max-height: 0;
+  transition: 0.3s ease;
+}
+
+.main-n-o-container input {
+  width: 100%;
+}
+.main-n-o-container div.DatePicker {
+  margin-top: 0.5rem;
+  width: 100%;
+  font-family: IranSans, serif;
+}
+.main-n-o-container div.DatePicker input {
+  padding-top: 10px;
+}
+.main-n-o-container .DatePicker__input {
+  transition: 0.4s ease;
+  border: solid 2px #bdbdbd;
+  border-radius: 5px;
+  outline: none;
+  text-align: right;
+  padding: 5px 5px;
+  direction: rtl;
+}
+.main-n-o-container .DatePicker__input:focus {
+  border: solid 2px #77b6f1;
+}
+
+/*# sourceMappingURL=NewOrder.css.map */

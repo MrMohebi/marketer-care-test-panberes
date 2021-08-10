@@ -59,7 +59,6 @@
   text-align: right;
   padding: 5px 5px;
   direction: rtl;
-
   &:focus {
     border: solid 2px #77b6f1;
   }
@@ -104,8 +103,11 @@
 }
 
 .costumers-table {
-  &:first-of-type {
+
+  tr.customers-table-head{
     border-bottom: #dadada 2px solid;
+    margin-bottom: 10px;
+    height: 25px;
   }
 
   td {

@@ -19,3 +19,6 @@ code {
 .responsive-calendar{
   font-size: 2px;
 }
+.swal2-container{
+  z-index: 999999;
+}

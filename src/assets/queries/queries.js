@@ -13,16 +13,16 @@ query{
     name
   }
 }`
-        $.ajax({
-            url: API_URL,
-            contentType: 'application/json',
-            type: 'POST',
-            data: JSON.stringify({
-                query: query
-            })
-        }).then((res) => {
-            callBackFunction(res)
+    $.ajax({
+        url: API_URL,
+        contentType: 'application/json',
+        type: 'POST',
+        data: JSON.stringify({
+            query: query
         })
+    }).then((res) => {
+        callBackFunction(res)
+    })
 
 
 }
@@ -80,8 +80,8 @@ mutation{
     })
 }
 
-let signUp = (introducerId,uid,name,phone,email,username,password,callback)=>{
-let query = `
+let signUp = (introducerId, uid, name, phone, email, username, password, callback) => {
+    let query = `
 
 mutation{
   createUser(
@@ -109,10 +109,109 @@ mutation{
         }).then((res) => {
             callback(res)
         })
-    }catch (e){
+    } catch (e) {
         console.log(e)
     }
 
 
 }
-export {loginQuery, getUserData, changeUserInfo,signUp}
+let NewCustomer = (token, name, age, addressText, phone, gender, maritalStatus,callback) => {
+    let query = `
+mutation{
+  createCustomer(
+    token:"${token}",
+    name:"${name}",
+    age:${age},
+    addressText:"${addressText}",
+    phone:"${phone}",
+    gender:"${gender}",
+    maritalStatus:"${maritalStatus}",
+  )
+  {
+    name
+  }
+}
+`
+    try {
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            callback(res)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+
+
+}
+
+let getCustomers = (token,callback) => {
+    let query = `
+query{
+  customers(
+    token:"${token}",
+  )
+  {
+    name
+    phone
+    age
+    id
+    marketerName
+  }
+}
+`
+    try {
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            callback(res)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+
+
+}
+
+
+let createCustomerOrder = (token,customerId,items,callback) => {
+    let query = `
+mutation{
+  createCustomerOrder(
+    token:"${token}"
+    customerId:"${customerId}"
+    items:"${items}"
+  )
+  {
+    customerId
+  }
+}
+`
+    try {
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            callback(res)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+
+
+}
+export {loginQuery, getUserData, changeUserInfo, signUp,NewCustomer,getCustomers,createCustomerOrder}

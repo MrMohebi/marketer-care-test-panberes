@@ -21,7 +21,7 @@ import {useHistory} from "react-router-dom";
 import $ from 'jquery'
 
 let queries = require('../../assets/queries/queries')
-
+let externalFunctions = require('../../assets/externalFunctions')
 // markup
 
 const IndexPage = () => {
@@ -63,6 +63,11 @@ const IndexPage = () => {
         },
     ]
     useEffect(() => {
+
+        if (externalFunctions.getToken()){
+            history.push("/panel");
+        }
+
         tippy('[data-tippy-content]', {
             animation: 'scale-subtle',
             arrow: true,
@@ -99,6 +104,7 @@ const IndexPage = () => {
             })
         } else {
             history.push("/panel", {token: res['data']['login']['token']});
+            externalFunctions.setToken(res['data']['login']['token'])
             swal.fire({
                 title: 'با موفقیت وارد شدید',
                 text: 'تبریک میگیم',
@@ -209,12 +215,18 @@ const IndexPage = () => {
                                 <div className={' LS-form-header'}>
                                     <img className={'form-img'} src={`/img/logo.png`} alt=""/>
                                 </div>
+                                <form action="POST" onSubmit={(e)=>{
+                                e.preventDefault()
+                                }}>
+
                                 {
                                     signUp ?
                                         <div className={'LS-form-body mt-4 '}>
 
+
                                             <div className={'row mb-4'}>
                                                 <div className={'col-md-6'}>
+
                                                     <label>
                                                         <i className={'ico-append fa fa-user'}/>
                                                         <input className={'name'}
@@ -321,7 +333,7 @@ const IndexPage = () => {
                                                         <input onChange={handleLogInInputsChange}
                                                                data-tippy-content={'نام کاربری'} type={'text'}
                                                                id={'username'}
-                                                               placeholder={"نام کاربری *"}/>
+                                                               placeholder={"نام کاربری (شماره موبایل) *"}/>
                                                     </label>
                                                 </div>
                                             </div>
@@ -341,7 +353,7 @@ const IndexPage = () => {
                                     signUp ?
                                         <div
                                             className={'manual-submit d-flex flex-row-reverse mb-4 justify-content-between align-items-center mt-4'}>
-                                            <button onClick={signUpClickHandler} disabled={loginButtonDisabled}
+                                            <button type={'submit'} onClick={signUpClickHandler} disabled={loginButtonDisabled}
                                                     className={'btn btn-primary submit d-flex'}>
                                                 {
                                                     loginLoading ?
@@ -376,7 +388,7 @@ const IndexPage = () => {
                                         :
                                         <div
                                             className={'manual-submit d-flex flex-row-reverse mb-4 justify-content-center align-items-center mt-4'}>
-                                            <button disabled={loginButtonDisabled} onClick={loginClickHandler}
+                                            <button type={'submit'} disabled={loginButtonDisabled} onClick={loginClickHandler}
                                                     className={'btn btn-primary submit d-flex'}>
                                                 {
                                                     loginLoading ?
@@ -395,6 +407,7 @@ const IndexPage = () => {
                                             </button>
                                         </div>
                                 }
+                                </form>
                             </div>
                         </div>
                         <div className={' right-side pt-4 ml-5'}>

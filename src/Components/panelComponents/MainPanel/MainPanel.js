@@ -1,5 +1,7 @@
 import React from 'react';
 import './css/mainPanel.css'
+import CustomersTable from "../../CustomersTable/CustomersTable";
+import {getToken} from "../../../assets/externalFunctions";
 const MainPanel = () => {
     return (
         <div className={'main-component-container px-2 py-3'}>
@@ -16,17 +18,7 @@ const MainPanel = () => {
                 <div className={'link-label IranSans w-100 '}>
                     لیست مشتریان
                 </div>
-                <table dir={'rtl'} className={'w-100 costumers-table mt-3 '}>
-                    <tr>
-                        <td>ردیف</td>
-                        <td>نام</td>
-                        <td>نام خانوادگی</td>
-                        <td>موبایل</td>
-                        <td>کد ملی</td>
-                        <td>تاریخ تولد</td>
-                        <td>معرف</td>
-                    </tr>
-                </table>
+                <CustomersTable token={getToken()}/>
             </div>
         </div>
     );

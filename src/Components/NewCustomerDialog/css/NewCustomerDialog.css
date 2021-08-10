@@ -1,0 +1,122 @@
+.newCustomerOverlay {
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.newCustomerPopUp {
+  padding-left: 20px;
+  width: 100%;
+  max-width: 400px;
+  height: 90%;
+  max-height: 600px;
+  overflow: scroll;
+  background: white;
+  border-radius: 5px;
+  padding-top: 20px;
+}
+.newCustomerPopUp input::-webkit-inner-spin-button, .newCustomerPopUp input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.newCustomerPopUp::-webkit-scrollbar {
+  display: block;
+}
+.newCustomerPopUp::-webkit-scrollbar-thumb {
+  width: 2px;
+  background-color: #9d9d9d;
+}
+
+.newCustomerInput {
+  width: 100%;
+  padding: 8px 5px 5px 5px;
+  border: solid #d3d3d3 1px;
+  border-radius: 3px;
+  outline: none;
+  font-family: IranSans, serif;
+  margin-top: 20px;
+}
+.newCustomerInput:focus {
+  border: solid #7da2de 1px;
+}
+.newCustomerInput::-webkit-scrollbar {
+  display: none;
+}
+
+.customerGenderSelection {
+  user-select: none;
+  position: relative;
+  margin-top: 25px;
+  height: 35px;
+  border: solid 1px #dadadd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.customerGenderSelection div.female {
+  color: white;
+}
+.customerGenderSelection div.single {
+  color: white;
+}
+
+.gender-toggle {
+  transition: 0.2s ease;
+  height: 100%;
+  width: 50%;
+  background-color: #0c0cb2;
+  z-index: 90;
+  border-radius: 10px;
+  left: 50%;
+}
+
+.marital-married div.single {
+  color: black;
+}
+.marital-married div.married {
+  color: white;
+}
+.marital-married div.gender-toggle {
+  left: 0;
+}
+
+.male-select div.female {
+  color: black;
+}
+.male-select div.male {
+  color: white;
+}
+.male-select div.gender-toggle {
+  left: 0;
+}
+
+.eachCustomerGender {
+  transition: 0.3s ease;
+  z-index: 99;
+  cursor: pointer;
+}
+
+@media all and (max-width: 400px) {
+  .newCustomerPopUp {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .submitNewCustomer {
+    position: absolute !important;
+    bottom: 20px;
+  }
+}
+.swal2-container {
+  z-index: 999999;
+}
+
+.MuiChip-label {
+  font-family: IranSans, Serif;
+  padding-top: 5px;
+}
+
+/*# sourceMappingURL=NewCustomerDialog.css.map */

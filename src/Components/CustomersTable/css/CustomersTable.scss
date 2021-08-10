@@ -1,0 +1,62 @@
+.table-ds {
+  td {
+    line-height: 30px;
+    border-left: 1px solid #dedede;
+    border-right: 1px solid #dedede;
+  }
+  //border-radius: 10px;
+  border-bottom: 1px solid #dedede;
+}
+
+.costumer-table-body {
+  tr {
+    cursor: pointer;
+    user-select: contain;
+    transition: .2s ease;
+
+    &:hover {
+      box-shadow: 0 0 5px #7878ff;
+    }
+  }
+}
+.close-popup-button{
+
+}
+.eachCustomerPopUp{
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  max-height: 800px;
+  max-width: 400px;
+  position: absolute;
+  border-radius: 10px ;
+  &::-webkit-scrollbar{
+    display: block;
+  }
+}
+
+.table-ds {
+  td{
+    animation-name: fadeInAnimation;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+  opacity: 0;
+  animation-name: fadeInAnimation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.customer-order-list{
+  overflow-y: hidden;
+  flex-flow: wrap;
+}
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+
+}

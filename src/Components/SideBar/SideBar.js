@@ -28,7 +28,7 @@ const SideBar = (props) => {
                 subnets: [
                     [
                         "لیست مشتریان ",
-                        '/login'
+                        2
                     ],
                     [
                         "فرم های مشاوره",
@@ -75,8 +75,6 @@ const SideBar = (props) => {
             },
 
         ]
-
-
 
 
         let changeComponentTransition = (newComponent) => {
@@ -152,7 +150,7 @@ const SideBar = (props) => {
                                                         <li className={'text-right d-flex align-items-center nav-items-subnet-item-inner '}
                                                             style={{paddingRight: 40, height: 30, color: '#c2c9c9'}}>
                                                             <button onClick={() => {
-                                                                changeComponentTransition(eachSideBarItem[eachSubnet[1]])
+                                                                changeComponentTransition([eachSubnet[1]])
                                                             }} style={{
                                                                 textDecoration: 'none',
                                                                 color: '#c2c9c9',

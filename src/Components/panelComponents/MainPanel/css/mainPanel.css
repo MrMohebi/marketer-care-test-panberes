@@ -94,8 +94,10 @@
   border: 2px #96b5d7 solid;
 }
 
-.costumers-table:first-of-type {
+.costumers-table tr.customers-table-head {
   border-bottom: #dadada 2px solid;
+  margin-bottom: 10px;
+  height: 25px;
 }
 .costumers-table td {
   font-size: 0.9rem;

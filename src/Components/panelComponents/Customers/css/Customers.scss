@@ -1,6 +1,8 @@
 .main-component-container {
   width: 100%;
   height: 100%;
+  max-height: calc(100vh - 50px);
+
 }
 
 .urls-container {
@@ -26,36 +28,41 @@
   margin-top: 20px;
 }
 
-.user-info-edit-input-container .DatePicker {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-}
-.user-info-edit-input-container input {
-  transition: 0.4s ease;
-  border: solid 2px #bdbdbd;
-  border-radius: 2px;
-  outline: none;
-  text-align: right;
-  padding: 5px 5px;
-  direction: rtl;
-  width: 100%;
-}
-.user-info-edit-input-container input:focus {
-  border: solid 2px #77b6f1;
+.user-info-edit-input-container {
+  .DatePicker {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  input {
+    transition: .4s ease;
+    border: solid 2px #bdbdbd;
+    border-radius: 2px;
+    outline: none;
+    text-align: right;
+    padding: 5px 5px;
+    direction: rtl;
+    width: 100%;
+
+    &:focus {
+      border: solid 2px #77b6f1;
+    }
+  }
 }
 
 .user-info-edit-input {
-  transition: 0.4s ease;
+  transition: .4s ease;
   border: solid 2px #bdbdbd;
   border-radius: 5px;
   outline: none;
   text-align: right;
   padding: 5px 5px;
   direction: rtl;
-}
-.user-info-edit-input:focus {
-  border: solid 2px #77b6f1;
+
+  &:focus {
+    border: solid 2px #77b6f1;
+  }
 }
 
 .user-info-edit-label {
@@ -65,6 +72,7 @@
   padding: 8px 0 0 0;
   margin-left: 2rem;
   width: 50px;
+
 }
 
 .url-box {
@@ -74,7 +82,7 @@
 }
 
 .url-link {
-  transition: 0.3s ease;
+  transition: .3s ease;
   border: 2px #b9b9b9 solid;
   padding: 10px 5px 5px 5px;
   border-radius: 5px;
@@ -84,19 +92,24 @@
   outline: none;
   font-family: IranSans, serif;
   line-height: 1.5rem;
-}
-.url-link::selection {
-  background-color: #189ca6;
-  color: white;
-}
-.url-link:focus {
-  border: 2px #96b5d7 solid;
+
+  &::selection {
+    background-color: #189ca6;
+    color: white;
+  }
+
+  &:focus {
+    border: 2px #96b5d7 solid;
+  }
 }
 
-.costumers-table td {
-  font-size: 0.9rem;
-  text-align: center;
-  font-family: IranSans, serif;
+.costumers-table {
+
+  td {
+    font-size: 0.9rem;
+    text-align: center;
+    font-family: IranSans;
+  }
 }
 
 @media all and (max-width: 500px) {
@@ -105,10 +118,7 @@
     flex-flow: column;
     align-items: center;
   }
-
   .url-link {
     width: 95%;
   }
 }
-
-/*# sourceMappingURL=userInfoPanel.css.map */
