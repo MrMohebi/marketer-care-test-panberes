@@ -5,44 +5,65 @@ import './css/NewOrder.css'
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
 import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 import {ButtonBase, Chip} from "@material-ui/core";
-let queries = require('../../assets/queries/queries')
 
+let queries = require('../../assets/queries/queries')
+let moment = require('moment-jalaali')
+let externalFunctions = require('../../assets/externalFunctions')
 const NewOrder = (props) => {
 
-    let [reminderDay, setReminderDat] = React.useState(null)
+    let [reminderDay, setReminderDate] = React.useState(null)
     let [customerOrderList, setCustomerOrderList] = React.useState([])
-    let [customerOrders, setCustomerOrders] = React.useState([])
     let [orderSubmitting, setOrderSubmitting] = React.useState(false)
-    let [currentCustomerInfo, setCurrentCustomerInfo] = React.useState({
-        name: '',
-        age: 0,
-        phone: '',
-        id: ''
-    })
+
     let deleteChip = (item) => () => {
-        let filteredOrders = customerOrders.filter(eachitem => {
-            return eachitem.key !== item.key;
+        let filteredOrderList = customerOrderList.filter(orderItem => {
+            return orderItem.name !== item.name;
         })
-        setCustomerOrders(filteredOrders)
+        setCustomerOrderList(filteredOrderList)
     }
 
     let handleOrderSubmitClick = () => {
-        let token = props.token;
-        let customerId = currentCustomerInfo['id'];
-        let items = JSON.stringify(
-            customerOrders.map(eachOrder => {
-                return eachOrder['label']
-            })
-        )
-        console.log(items)
-        queries.createCustomerOrder(token,customerId,items,createOrderCallback)
+        let token =externalFunctions.getToken();
+        let customerId = props.currentCustomerInfo['id'];
+
+        queries.createCustomerOrder(token, customerId, customerOrderList, createOrderCallback)
+        setOrderSubmitting(true)
     }
-    let createOrderCallback = (res)=>{
+    let createOrderCallback = (res) => {
         console.log(res)
+        setOrderSubmitting(false)
+
+    }
+    let addItemClickHandler = () => {
+        let remindAt;
+        if (reminderDay !== null) {
+            remindAt = reminderDay['year'] + '/' + reminderDay['month'] + '/' + reminderDay['day'];
+            remindAt = moment(remindAt, 'jYYYY/jMM/jDD').unix()
+        }
+
+        let itemName = $('#item-name')
+        let itemPrice = $('#item-price')
+        let itemDetails = $('#item-details')
+        let itemNote = $('#item-note')
+        let itemKey = itemName.val();
+        setCustomerOrderList([...customerOrderList, {
+            name: itemName.val(),
+            price: itemPrice.val(),
+            remindAt: remindAt,
+            itemKey: itemKey
+        }])
+        itemName.val('')
+        itemPrice.val('')
+        itemDetails.val('')
+        itemNote.val('')
+        $('.priceHolder').css({
+            maxHeight: 0,
+        })
+        $('#price-holder').text('')
     }
     return (
         <div className={'w-100 h-100 main-n-o-container d-flex flex-column align-items-center'}>
-            <input type="text" className={'user-info-edit-input mt-3 IranSansLight pt-2 '} placeholder={'نام محصول'}
+            <input type="text" className={'user-info-edit-input  IranSansLight pt-2 '} placeholder={'نام محصول'}
                    id={'item-name'}/>
             <input type="text" onChange={(e) => {
                 if (isNaN(e.target.value[e.target.value.length - 1])) {
@@ -59,26 +80,26 @@ const NewOrder = (props) => {
                     })
                 }
 
-            }} className={'user-info-edit-input mt-2 IranSansLight pt-2'} placeholder={'قیمت '} id={'item-name'}/>
+            }} className={'user-info-edit-input mt-2 IranSansLight pt-2'} placeholder={'قیمت '} id={'item-price'}/>
 
             <div className={'d-flex flex-row IranSans text-black-50 mt-1 priceHolder'} style={{
                 overflow: "hidden"
             }}>
                 <span className={'mr-2'}> تومان</span>
 
-                <span id={'price-holder'} dir={"ltr"}></span>
+                <span id={'price-holder'} dir={"ltr"}/>
             </div>
             <input type="text" className={'user-info-edit-input mt-2 IranSansLight pt-2'} placeholder={'توضیحات'}
-                   id={'item-name'}/>
+                   id={'item-details'}/>
             <input type="text" className={'user-info-edit-input mt-2 IranSansLight pt-2'} placeholder={'یادداشت'}
-                   id={'item-name'}/>
+                   id={'item-note'}/>
 
             <DatePicker
                 value={reminderDay}
                 calendarClassName={'responsive-calendar'}
                 calendarPopperPosition={'top'}
                 onChange={(e) => {
-                    setReminderDat(e)
+                    setReminderDate(e)
                 }}
 
                 inputPlaceholder="تاریخ یاد آوری"
@@ -87,7 +108,7 @@ const NewOrder = (props) => {
             />
 
             <ButtonBase onClick={() => {
-
+                addItemClickHandler()
             }} style={{
                 outline: 'none',
                 height: 50,
@@ -95,18 +116,18 @@ const NewOrder = (props) => {
                 border: '1px solid #28a745',
                 borderRadius: '5px',
                 background: 'white',
-                marginTop:'20px'
+                marginTop: '20px'
             }}>
                 <i className={'fa fa-plus ml-2'} style={{
                     fontSize: 30,
                     color: '#28a745'
                 }}/>
                 <span className={'IranSans mx-2'} style={{
-                    color:'#28a745'
+                    color: '#28a745'
                 }}>افزودن محصول به لیست خرید</span>
             </ButtonBase>
             <div className={'w-100'}>
-                <h2>this is liste kharid</h2>
+
 
             </div>
 
@@ -114,17 +135,16 @@ const NewOrder = (props) => {
                 pointerEvents: orderSubmitting ? 'none' : 'all'
             }}>
                 {
-                    customerOrders.map((order) => {
+                    customerOrderList.map((item) => {
                         return (
                             <div key={Math.random() * 100}>
                                 <Chip className={'IranSans'}
-
                                       style={{
                                           marginLeft: 10,
                                           marginTop: 10
                                       }}
-                                      label={order.label}
-                                      onDelete={deleteChip(order)}
+                                      label={item['name']}
+                                      onDelete={deleteChip(item)}
                                 />
                             </div>
                         );
@@ -132,26 +152,24 @@ const NewOrder = (props) => {
                 }
             </div>
 
-
-            <ButtonBase onClick={() => {
-
+            <ButtonBase disabled={!customerOrderList.length} onClick={() => {
+                handleOrderSubmitClick()
             }} style={{
                 outline: 'none',
                 height: 50,
-                // width: '23%',
                 border: '1px solid #286ea7',
                 borderRadius: '5px',
                 background: 'white',
-                marginTop:'20px',
-                transition:'.2s ease',
-                opacity:0.5
+                marginTop: '20px',
+                transition: '.2s ease',
+                opacity: customerOrderList.length ? 1 : 0.4
             }}>
                 <i className={'fa fa-check ml-2'} style={{
                     fontSize: 30,
                     color: '#286ea7'
                 }}/>
                 <span className={'IranSans mx-2'} style={{
-                    color:'#286ea7'
+                    color: '#286ea7'
                 }}>ثبت خرید</span>
             </ButtonBase>
 

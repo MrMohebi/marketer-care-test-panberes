@@ -60,3 +60,8 @@
   }
 
 }
+.eachCustomerPopUp{
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}
