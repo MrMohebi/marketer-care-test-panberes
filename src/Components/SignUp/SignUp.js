@@ -78,7 +78,7 @@ const IndexPage = () => {
 
     let loginClickHandler = (e, username, password) => {
         if (username && password) {
-            if (username.length > 2 && password.length > 2) {
+            if (username.length > 2 && password.length > 1) {
                 setLoginLoading(true)
                 setLoginButtonDisabled(true)
                 queries.loginQuery(username, password, checkLogin)
@@ -86,7 +86,7 @@ const IndexPage = () => {
         } else {
             let username = document.getElementById('username').value
             let password = document.getElementById('password').value
-            if (username.length > 2 && password.length > 2) {
+            if (username.length > 2 && password.length > 1) {
                 setLoginLoading(true)
                 setLoginButtonDisabled(true)
                 queries.loginQuery(username, password, checkLogin)

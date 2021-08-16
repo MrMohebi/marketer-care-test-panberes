@@ -42,8 +42,15 @@
 }
 
 .customer-order-list {
-  overflow-y: hidden;
+  transition: 0.8s ease;
+  overflow-y: scroll;
   flex-flow: wrap;
+}
+.customer-order-list::-webkit-scrollbar {
+  width: 0;
+}
+.customer-order-list::-webkit-scrollbar-thumb {
+  background: white;
 }
 
 @keyframes fadeInAnimation {
@@ -56,6 +63,30 @@
 }
 .eachCustomerPopUp::-webkit-scrollbar {
   display: none;
+}
+
+.new-order-click-section {
+  height: 60px;
+}
+
+#customer-new-order-section {
+  max-height: 0;
+}
+
+.red-border {
+  border-color: #ff3d3d !important;
+}
+
+.new-order-angle {
+  transition: 0.3s ease;
+}
+
+.user-details {
+  transition: 0.4s ease;
+}
+
+.recent-orders-main {
+  display: flex;
 }
 
 /*# sourceMappingURL=CustomersTable.css.map */

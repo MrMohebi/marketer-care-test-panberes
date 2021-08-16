@@ -5,6 +5,7 @@ import './css/NewOrder.css'
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
 import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 import {ButtonBase, Chip} from "@material-ui/core";
+import {CircleSpinner} from "react-spinners-kit";
 
 let queries = require('../../assets/queries/queries')
 let moment = require('moment-jalaali')
@@ -23,15 +24,18 @@ const NewOrder = (props) => {
     }
 
     let handleOrderSubmitClick = () => {
-        let token =externalFunctions.getToken();
+        let token = externalFunctions.getToken();
         let customerId = props.currentCustomerInfo['id'];
 
-        queries.createCustomerOrder(token, customerId, customerOrderList, createOrderCallback)
+        console.log(JSON.stringify(customerOrderList))
+        queries.createCustomerOrder(token, customerId, JSON.stringify(customerOrderList), createOrderCallback)
         setOrderSubmitting(true)
     }
     let createOrderCallback = (res) => {
         console.log(res)
+        setCustomerOrderList([])
         setOrderSubmitting(false)
+
 
     }
     let addItemClickHandler = () => {
@@ -46,20 +50,36 @@ const NewOrder = (props) => {
         let itemDetails = $('#item-details')
         let itemNote = $('#item-note')
         let itemKey = itemName.val();
-        setCustomerOrderList([...customerOrderList, {
-            name: itemName.val(),
-            price: itemPrice.val(),
-            remindAt: remindAt,
-            itemKey: itemKey
-        }])
-        itemName.val('')
-        itemPrice.val('')
-        itemDetails.val('')
-        itemNote.val('')
-        $('.priceHolder').css({
-            maxHeight: 0,
-        })
-        $('#price-holder').text('')
+        if (itemName.val().length > 2) {
+            if (itemPrice.val().length > 3) {
+                setCustomerOrderList([...customerOrderList, {
+                    name: itemName.val(),
+                    price: itemPrice.val(),
+                    remindAt: remindAt,
+                    itemKey: itemKey
+                }])
+                itemName.val('')
+                itemPrice.val('')
+                itemDetails.val('')
+                itemNote.val('')
+                $('.priceHolder').css({
+                    maxHeight: 0,
+                })
+                $('#price-holder').text('')
+            } else {
+                itemPrice[0].classList.add('red-border')
+                setTimeout(() => {
+                    itemPrice[0].classList.remove('red-border')
+                }, 300)
+            }
+
+        } else {
+            itemName[0].classList.add('red-border')
+            setTimeout(() => {
+                itemName[0].classList.remove('red-border')
+            }, 300)
+        }
+
     }
     return (
         <div className={'w-100 h-100 main-n-o-container d-flex flex-column align-items-center'}>
@@ -126,15 +146,17 @@ const NewOrder = (props) => {
                     color: '#28a745'
                 }}>افزودن محصول به لیست خرید</span>
             </ButtonBase>
+
             <div className={'w-100'}>
 
 
             </div>
 
-            <div className={'px-2 '} style={{
+            <div className={'px-2 d-flex  w-100 ' + (customerOrderList.length?'flex-wrap':'align-items-center mt-2 justify-content-center')} style={{
                 pointerEvents: orderSubmitting ? 'none' : 'all'
             }}>
                 {
+                    customerOrderList.length?
                     customerOrderList.map((item) => {
                         return (
                             <div key={Math.random() * 100}>
@@ -148,10 +170,12 @@ const NewOrder = (props) => {
                                 />
                             </div>
                         );
-                    })
+                    }):
+                        <span style={{
+                            fontSize:'0.8rem'
+                        }} className={'text-black-50 IranSans'}>محصولی در لیست خرید نیست</span>
                 }
             </div>
-
             <ButtonBase disabled={!customerOrderList.length} onClick={() => {
                 handleOrderSubmitClick()
             }} style={{
@@ -164,10 +188,19 @@ const NewOrder = (props) => {
                 transition: '.2s ease',
                 opacity: customerOrderList.length ? 1 : 0.4
             }}>
-                <i className={'fa fa-check ml-2'} style={{
-                    fontSize: 30,
-                    color: '#286ea7'
-                }}/>
+                {
+                    orderSubmitting ?
+                        <div className={'mx-2'}>
+                            <CircleSpinner size={'20'} color={'#286ea7'}/>
+
+                        </div>
+                        :
+                        <i className={'fa fa-check ml-2'} style={{
+                            fontSize: 30,
+                            color: '#286ea7'
+                        }}/>
+                }
+
                 <span className={'IranSans mx-2'} style={{
                     color: '#286ea7'
                 }}>ثبت خرید</span>

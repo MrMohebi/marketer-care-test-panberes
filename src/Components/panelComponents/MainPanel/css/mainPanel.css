@@ -3,6 +3,13 @@
   height: 100%;
   max-height: calc(100vh - 50px);
 }
+.main-component-container::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
+}
+.main-component-container::-webkit-scrollbar-thumb {
+  z-index: -1;
+}
 
 .urls-container {
   background-color: #fff;

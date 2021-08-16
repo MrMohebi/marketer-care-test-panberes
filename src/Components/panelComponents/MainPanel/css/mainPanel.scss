@@ -3,6 +3,14 @@
   height: 100%;
   max-height: calc(100vh - 50px);
 
+  &::-webkit-scrollbar {
+    display: none;
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    z-index: -1;
+  }
 }
 
 .urls-container {
@@ -59,6 +67,7 @@
   text-align: right;
   padding: 5px 5px;
   direction: rtl;
+
   &:focus {
     border: solid 2px #77b6f1;
   }
@@ -104,7 +113,7 @@
 
 .costumers-table {
 
-  tr.customers-table-head{
+  tr.customers-table-head {
     border-bottom: #dadada 2px solid;
     margin-bottom: 10px;
     height: 25px;

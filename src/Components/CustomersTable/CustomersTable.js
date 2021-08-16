@@ -1,11 +1,15 @@
 import React, {useEffect} from 'react';
-import './css/CustomersTable.css'
+import './css/CustomersTable.css';
 import {BarsSpinner} from "react-spinners-kit";
 import NewOrder from "../NewOrder/NewOrder";
-
+import CustomerOrderList from "../CustomerOrderList/CustomerOrderList";
+import $ from 'jquery';
+import gsap from 'gsap';
+import {ButtonBase} from "@material-ui/core";
 let queries = require('../../assets/queries/queries')
-const CustomersTable = (props) => {
 
+
+const CustomersTable = (props) => {
     useEffect(() => {
         getCustomers()
     }, [props.update])
@@ -25,6 +29,47 @@ const CustomersTable = (props) => {
 
         }
     }
+    let handleNewOrderSectionClick = () => {
+        let section = $('#customer-new-order-section');
+        let arrow = $('.new-order-angle')
+        let userDetails = $('.user-details')
+        let recentOrders = $('.recent-orders-main')
+
+        if (section[0].classList.contains('new-order-open')){
+            arrow.css({
+                transform:'rotateZ(0deg)'
+            })
+            section.css({
+                maxHeight:'0%'
+            })
+            userDetails.css({
+                maxHeight:'30%'
+            })
+
+            setTimeout(()=>{
+                recentOrders.css({
+                    display:'flex'
+                })
+            },400)
+
+        }else {
+            section.css({
+                maxHeight:'100%'
+            })
+            userDetails.css({
+                maxHeight:'0%',
+                overflow:'hidden',
+                paddingBottom:'0'
+            })
+            recentOrders.css({
+                display:'none'
+            })
+            arrow.css({
+                transform:'rotateZ(180deg)'
+            })
+        }
+        section[0].classList.toggle('new-order-open')
+    }
     let getCustomersCallback = (res) => {
         if (res['errors']) {
             setTimeout(() => {
@@ -33,7 +78,8 @@ const CustomersTable = (props) => {
         } else {
             let customers = res['data']['customers'].map((eachCustomer, index) => {
                 return (
-                    <tr onClick={() => {
+                    <tr key={eachCustomer['id']} onClick={() => {
+                        console.log(eachCustomer['id'])
                         setCurrentCustomerInfo({
                             name: eachCustomer['name'],
                             age: eachCustomer['age'],
@@ -68,30 +114,42 @@ const CustomersTable = (props) => {
                     }} style={{
                         position: 'absolute',
                         top: 10,
-                        left: 0,
+                        right: 0,
                         height: 30,
                         width: 30,
                         fontSize: 20,
                         cursor: 'pointer'
                     }} className={' IranSans d-flex justify-content-center align-items-center'}>x
                     </div>
-                    <div className={'d-flex flex-column align-items-center border-bottom w-100 pb-3'}>
+                    <div className={'d-flex flex-column align-items-center w-100 user-details'}>
                         <span className={'each-customer-name mt-5 IranSansBold'}
                               id={'each-customer-name'}>{currentCustomerInfo['name']}</span>
                         <span className={'each-customer-name mt-2 IranSans'}
                               id={'each-customer-age'}>{currentCustomerInfo['age']} :سن </span>
-                        <span className={'each-customer-name mt-2 IranSans'}
+                        <span style={{
+                            height:35
+                        }} className={'each-customer-name mt-2 IranSans'}
                               id={'each-customer-phone'}>{currentCustomerInfo['phone']} :شماره تلفن </span>
                     </div>
-                    <div className={'w-100 d-flex flex-column align-items-center'}>
-                        <span  className={'IranSans mt-4'}>افزودن خرید جدید</span>
-                        <div className={'d-flex customer-order-list w-100'}>
-                            <div
-                                className={'new-item-input-holder d-flex  flex-column align-items-center justify-content-center w-100 mt-3 py-2 px-2 '}>
-                                <NewOrder currentCustomerInfo={currentCustomerInfo}/>
-                            </div>
+
+                    <ButtonBase style={{
+                        outline:'none'
+                    }} className={'w-100 d-flex flex-column align-items-center '}>
+                        <div className={' d-flex flex-row justify-content-between align-items-center w-100 new-order-click-section border-bottom border-top'} onClick={handleNewOrderSectionClick}>
+                            <i className={'fa fa-angle-down ml-3 new-order-angle'} style={{}}/>
+                            <span className={'IranSans '}>افزودن خرید جدید</span>
+                            <i className={'fa fa-angle-down'} style={{opacity:'0'}}/>
+
+                        </div>
+                    </ButtonBase>
+                    <div id={'customer-new-order-section'} className={'d-flex customer-order-list w-100 '}>
+                        <div
+                            className={'new-item-input-holder d-flex  flex-column align-items-center justify-content-center w-100 mt-3 py-2 px-2 '}>
+                            <NewOrder currentCustomerInfo={currentCustomerInfo}/>
                         </div>
                     </div>
+                    <CustomerOrderList/>
+
                 </div>
             </div>
             <table dir={'rtl'} className={'w-100 costumers-table mt-3 '}>
