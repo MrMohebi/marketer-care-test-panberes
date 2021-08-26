@@ -1,92 +1,104 @@
 .table-ds {
-  border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
 }
+
 .table-ds td {
-  line-height: 30px;
-  border-left: 1px solid #dedede;
-  border-right: 1px solid #dedede;
+    line-height: 30px;
+    border-left: 1px solid #dedede;
+    border-right: 1px solid #dedede;
 }
 
 .costumer-table-body tr {
-  cursor: pointer;
-  user-select: contain;
-  transition: 0.2s ease;
+    cursor: pointer;
+    user-select: contain;
+    transition: 0.2s ease;
 }
+
 .costumer-table-body tr:hover {
-  box-shadow: 0 0 5px #7878ff;
+    box-shadow: 0 0 5px #7878ff;
 }
 
 .eachCustomerPopUp {
-  background-color: #fff;
-  width: 100%;
-  height: 100%;
-  max-height: 800px;
-  max-width: 400px;
-  position: absolute;
-  border-radius: 10px;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    max-height: 800px;
+    max-width: 400px;
+    position: absolute;
+    border-radius: 10px;
+    scrollbar-width: none;
+
 }
+
 .eachCustomerPopUp::-webkit-scrollbar {
-  display: block;
+    display: block;
 }
 
 .table-ds {
-  opacity: 0;
-  animation-name: fadeInAnimation;
-  animation-duration: 0.2s;
-  animation-fill-mode: forwards;
+    opacity: 0;
+    animation-name: fadeInAnimation;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
 }
+
 .table-ds td {
-  animation-name: fadeInAnimation;
-  animation-duration: 0.2s;
-  animation-fill-mode: forwards;
+    animation-name: fadeInAnimation;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
 }
 
 .customer-order-list {
-  transition: 0.8s ease;
-  overflow-y: scroll;
-  flex-flow: wrap;
+    transition: 0.8s ease;
+    overflow-y: scroll;
+    flex-flow: wrap;
 }
+
 .customer-order-list::-webkit-scrollbar {
-  width: 0;
+    width: 0;
 }
+
 .customer-order-list::-webkit-scrollbar-thumb {
-  background: white;
+    background: white;
 }
 
 @keyframes fadeInAnimation {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
+
 .eachCustomerPopUp::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .new-order-click-section {
-  height: 60px;
+    height: 60px;
 }
 
 #customer-new-order-section {
-  max-height: 0;
+    max-height: 0;
+
+    scrollbar-width: none;
+
 }
 
 .red-border {
-  border-color: #ff3d3d !important;
+    border-color: #ff3d3d !important;
 }
 
 .new-order-angle {
-  transition: 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .user-details {
-  transition: 0.4s ease;
+    transition: 0.4s ease;
 }
 
 .recent-orders-main {
-  display: flex;
+    display: flex;
 }
 
 /*# sourceMappingURL=CustomersTable.css.map */

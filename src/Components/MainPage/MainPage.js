@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import Header from "../Header/Header";
 import SideBar from "../SideBar/SideBar";
-import {Redirect, useHistory, useLocation} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import './css/main.css'
 
 import MainPanel from "../panelComponents/MainPanel/MainPanel";
 import UserInfoPanel from "../panelComponents/UserInfoPanel/UserInfoPanel";
 import Customers from "../panelComponents/Customers/Customers";
-import NewCustomerDialog from "../NewCustomerDialog/NewCustomerDialog";
+import Diagram from "../panelComponents/Diagram/Diagram";
 
 let queries = require('../../assets/queries/queries')
 
@@ -16,14 +16,13 @@ const MainPage = () => {
 
 
     let [sideBarOpen, setSideBarOpen] = React.useState(true)
-    const location = useLocation();
-
     const token  = externalFunctions.getToken()
     let [userData, setUserData] = React.useState({})
     let components =[
-        <MainPanel/>,
+        <MainPanel setUserData={setUserData}/>,
         <UserInfoPanel userData={userData} token={token}/>,
-        <Customers token={token}/>
+        <Customers token={token}/>,
+        <Diagram />
     ]
     let history = useHistory()
     let [currentComponent, setCurrentComponent] = React.useState(0)

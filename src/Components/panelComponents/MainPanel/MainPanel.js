@@ -1,8 +1,20 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './css/mainPanel.css'
 import CustomersTable from "../../CustomersTable/CustomersTable";
 import {getToken} from "../../../assets/externalFunctions";
-const MainPanel = () => {
+let queries = require('../../../assets/queries/queries')
+const MainPanel = (props) => {
+    let [userLink] = useState()
+    let linkRef = useRef(null)
+
+
+    useEffect(()=>{
+        queries.getUserData(getToken(),(data)=>{
+            linkRef.current.value = data;
+            linkRef.current.value = "https://schcare.ir/"+(data.data.user.phone)
+            props.setUserData(data.data.user)
+        })
+    },[])
     return (
         <div className={'main-component-container px-2 py-3'}>
             <div className={'urls-container w-100 pt-4 px-3 pb-4'}>
@@ -10,7 +22,7 @@ const MainPanel = () => {
                     لینک یکتای شما جهت معرفی
                 </div>
                 <div className={'url-box mx-2 '}>
-                    <input className={'url-link'} type="text" readOnly={true} value={'http://mokafela.ir23824234'}/>
+                    <input ref={linkRef} className={'url-link'} type="text" readOnly={true} value={userLink}/>
                     <button className={'btn btn-success IranSans ml-auto mr-auto my-3'}> کپی</button>
                 </div>
             </div>

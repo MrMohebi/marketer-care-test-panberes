@@ -19,7 +19,7 @@ const SideBar = (props) => {
             {
                 title: 'ژنولوژی',
                 iconClass: 'fa fa-tree',
-                component: 'local'
+                component: 3
             },
             {
 

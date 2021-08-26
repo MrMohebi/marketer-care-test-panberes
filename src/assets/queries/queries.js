@@ -33,6 +33,7 @@ let getUserData = (token, callbackFunction) => {
 query{
   user(token:"${token}"){
     username
+    uid
     avatar
     name
     phone
@@ -190,7 +191,7 @@ mutation{
   createCustomerOrder(
     token:"${token}"
     customerId:"${customerId}"
-    items:"${items}"
+    items:${items}
   )
   {
     customerId

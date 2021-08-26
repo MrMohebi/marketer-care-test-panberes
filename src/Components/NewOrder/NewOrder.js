@@ -27,8 +27,8 @@ const NewOrder = (props) => {
         let token = externalFunctions.getToken();
         let customerId = props.currentCustomerInfo['id'];
 
-        console.log(JSON.stringify(customerOrderList))
-        queries.createCustomerOrder(token, customerId, JSON.stringify(customerOrderList), createOrderCallback)
+        console.log(customerOrderList)
+        queries.createCustomerOrder(token, customerId,customerOrderList, createOrderCallback)
         setOrderSubmitting(true)
     }
     let createOrderCallback = (res) => {
@@ -54,9 +54,8 @@ const NewOrder = (props) => {
             if (itemPrice.val().length > 3) {
                 setCustomerOrderList([...customerOrderList, {
                     name: itemName.val(),
-                    price: itemPrice.val(),
-                    remindAt: remindAt,
-                    itemKey: itemKey
+                    price: parseInt(itemPrice.val()) ,
+                    remindAt:isNaN(parseInt(remindAt))?0:remindAt ,
                 }])
                 itemName.val('')
                 itemPrice.val('')

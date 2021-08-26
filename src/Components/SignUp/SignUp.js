@@ -13,7 +13,6 @@ import 'tippy.js/animations/scale-subtle.css';
 // import '../assets/FA/css/all.css'
 import '@fortawesome/fontawesome-free/css/all.css';
 //js
-import tippy from 'tippy.js';
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
 import {CircularProgress} from "@material-ui/core";
 import swal from 'sweetalert2'
@@ -67,13 +66,12 @@ const IndexPage = () => {
         if (externalFunctions.getToken()){
             history.push("/panel");
         }
-
-        tippy('[data-tippy-content]', {
-            animation: 'scale-subtle',
-            arrow: true,
-            trigger: 'focus',
-            placement: 'bottom',
-        })
+        // tippy('[data-tippy-content]', {
+        //     animation: 'scale-subtle',
+        //     arrow: true,
+        //     trigger: 'focus',
+        //     placement: 'bottom',
+        // })
     }, [])
 
     let loginClickHandler = (e, username, password) => {
@@ -94,6 +92,7 @@ const IndexPage = () => {
         }
     }
     let checkLogin = (res) => {
+        console.log(res)
         setLoginLoading(false)
         setLoginButtonDisabled(false)
         if (res['errors']) {
@@ -133,13 +132,13 @@ const IndexPage = () => {
 
         if (passwordsAreMatch) {
             if (phone.length === 11) {
-                if (password.length > 5) {
+                if (password.length > 7) {
                     queries.signUp(introducerId, uid, fullName, phone, email, phone, password, signUpCallback)
                 } else {
                     swal.fire({
                         icon: 'error',
                         title: 'لطفا مجددا تلاش کنید',
-                        text: 'حد اقل کارکتر مجاز برای پسورد 6 کارکتر میباشد',
+                        text: 'حد اقل کارکتر مجاز برای پسورد 8 کارکتر میباشد',
                         confirmButtonText: 'تایید'
                     })
                 }
@@ -178,7 +177,6 @@ const IndexPage = () => {
                 text: 'وارد شوید',
                 confirmButtonText: 'ورود'
             }).then(() => {
-                // console.log(res['data']['createUser'])
                 loginClickHandler("", $('.phone').val(), $('.password').val())
             })
         }
@@ -342,7 +340,7 @@ const IndexPage = () => {
                                                     <label>
                                                         <i className={'ico-append fa fa-user'}/>
                                                         <input onChange={handleLogInInputsChange} type={'text'}
-                                                               data-tippy-content={'کلمه عبور'} id={'password'}
+                                                                id={'password'}
                                                                placeholder={"کلمه عبور *"}/>
                                                     </label>
                                                 </div>
