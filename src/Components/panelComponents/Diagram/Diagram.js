@@ -1,17 +1,27 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './css/Diagram.css'
 import * as d3 from 'd3/dist/d3'
 import {ButtonBase} from "@material-ui/core";
+import {getToken} from "../../../assets/externalFunctions";
+import {resetApolloContext} from "@apollo/client";
+import {CircleSpinner, GridSpinner} from "react-spinners-kit";
 
-const Diagram = () => {
+let queries = require('../../../assets/queries/queries')
+
+const Diagram = (props) => {
     let networkData = useRef(null)
     let networkDataLinks = useRef(null)
-    let rectanglesWidth = 70;
-    let rectanglesHeight = 30;
+    let rectanglesWidth = 120;
+    let rectanglesHeight = 40;
     let namesSize = 20;
     let zoomMultiplier = 0.2;
     let expendedSubnets = [''];
     let mouseOverThese = [];
+    let [diagramLoading, setDLoading] = useState(true)
+    let treeSize = useRef({
+        w: 0,
+        h: 0
+    })
     let updateTree = (data) => {
         let dataToShow = data.filter(eachItem => {
             return expendedSubnets.includes(eachItem.parent)
@@ -27,16 +37,19 @@ const Diagram = () => {
         }).parentId(function (d) {
             return d.parent
         })(dataToShow)
-        let treeStructure = d3.tree().size([dataToShow.length * rectanglesWidth, dataToShow.length * rectanglesHeight / 2]);
+        treeSize.current.w = dataToShow.length * rectanglesWidth
+        treeSize.current.h = dataToShow.length * rectanglesHeight / 2
+        let treeStructure = d3.tree().size([treeSize.current.w, treeSize.current.h]);
         let information = treeStructure(dataStructure);
         networkData.current = information.descendants();
         networkDataLinks.current = information.links();
+
         drawInformation(1, transPose)
     }
 
     function doItHaveSubsets(item) {
         let subset = false;
-        mainData.forEach(eachItem => {
+        mainData.current.forEach(eachItem => {
             if (item.data.child === eachItem.parent) {
                 subset = true;
             }
@@ -44,50 +57,28 @@ const Diagram = () => {
         return subset;
     }
 
-    let mainData = [
-        {child: 'mokafelam ke', parent: ''},
-        {child: 'ali', parent: 'mokafelam ke'},
-        {child: 'ag', parent: 'mokafelam ke'},
-        {child: 'qq', parent: 'mokafelam ke'},
-        {child: 'ww', parent: 'mokafelam ke'},
-        {child: 'ee', parent: 'mokafelam ke'},
-        {child: 'rr', parent: 'mokafelam ke'},
-        {child: 'tt', parent: 'mokafelam ke'},
-        {child: 'yy', parent: 'mokafelam ke'},
-        {child: 'uu', parent: 'mokafelam ke'},
-        {child: 'ii', parent: 'mokafelam ke'},
-        {child: 'oo', parent: 'mokafelam ke'},
-        {child: 'pp', parent: 'mokafelam ke'},
-        {child: 'aaa', parent: 'ag'},
-        {child: 'sss', parent: 'ag'},
-        {child: 'ddd', parent: 'ag'},
-        {child: 'fff', parent: 'ag'},
-        {child: 'ggg', parent: 'ag'},
-        {child: 'hhh', parent: 'ag'},
-        {child: 'jjj', parent: 'ag'},
-        {child: 'kkk', parent: 'ag'},
-        {child: 'lll', parent: 'ag'},
-        {child: 'zzz', parent: 'ag'},
-        {child: 'xxx', parent: 'ag'},
-        {child: 'ccc', parent: 'ag'},
-        {child: 'vvv', parent: 'ag'},
-        {child: 'bbb', parent: 'ag'},
-        {child: 'nnn', parent: 'ag'},
-        {child: 'mmm', parent: 'ag'},
-        {child: 'asd', parent: 'ag'},
-        {child: 'zxc', parent: 'ag'},
-        {child: 'xcv', parent: 'ag'},
-        {child: 'cvb', parent: 'ag'},
-        {child: 'tyu', parent: 'ali'},
-        {child: 'dfs', parent: 'ali'},
-        {child: 'rth', parent: 'ali'},
-        {child: 'wyn', parent: 'ali'},
-        {child: 'moi', parent: 'ali'},
-        {child: 'asdf', parent: 'sss'},
-        {child: 'wert', parent: 'sss'},
-        {child: 'rtui', parent: 'sss'},
-    ]
+    let mainData = useRef()
+
+    let initQuery = () => {
+        queries.firstTimeSubset(getToken(), (res) => {
+            if (res.data.user) {
+                res.data.user['subsets'].forEach(item => {
+                    if (item['subset']) {
+
+                    }
+                    mainData.current.push({parent: props.userData.name, child: item.name})
+                })
+                setDLoading(false)
+            }
+            updateTree(mainData.current)
+
+        })
+    }
     useEffect(() => {
+
+        mainData.current = [
+            {child: props.userData.name, parent: ''},
+        ]
         let canvasContainer = document.querySelector('#container')
         let canvas = document.querySelector('.canv')
         canvas.width = canvasContainer.clientWidth;
@@ -96,11 +87,23 @@ const Diagram = () => {
             canvas.width = canvasContainer.clientWidth;
             canvas.height = canvasContainer.clientHeight;
         })
-        updateTree(mainData)
+        initQuery()
+
+        // queries.getSubsets(4,getToken(),(res)=>{
+        //     res.data.user['subsets'].forEach(item=>{
+        //         if (item['subset']){
+        //
+        //         }
+        //         mainData.current.push({parent: props.userData.name,child:item.name})
+        //
+        //     })
+        // })
+        updateTree(mainData.current)
     }, [])
 
     //-----------------------------high weight moving CPU------------------
 
+    let image = document.getElementById('noAv')
     let drawInformation = (scale, transPose) => {
         CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
             if (width < 2 * radius) radius = width / 2;
@@ -134,35 +137,37 @@ const Diagram = () => {
                     c.strokeStyle = '#707070'
                     changeMouseCursor('grab')
                 }
-                c.roundRect(item.x + transPose.x, item.y + transPose.y, rectanglesWidth, rectanglesHeight, rectanglesWidth / 15).stroke();
+
+
+                c.roundRect(item.x + transPose.x, item.y + transPose.y, rectanglesWidth, rectanglesHeight, rectanglesWidth / 40).stroke();
+
                 if (doItHaveSubsets(item)) {
                     c.beginPath()
-                    c.arc(item.x + transPose.x + rectanglesWidth / 2, item.y + transPose.y + rectanglesHeight, rectanglesWidth / 10, 0, 2 * Math.PI)
-                    c.fillStyle = '#fff'
+                    c.arc(item.x + transPose.x + rectanglesWidth / 2, item.y + transPose.y + rectanglesHeight, rectanglesWidth / 30, 0, 2 * Math.PI)
+                    c.fillStyle = '#b9b9b9'
                     c.fill();
                     c.stroke()
-                    c.beginPath()
-                    c.moveTo(item.x + transPose.x + rectanglesWidth / 2, item.y + transPose.y + rectanglesHeight)
-                    c.lineTo(item.x + transPose.x + rectanglesWidth / 2 - rectanglesHeight / 6, item.y + transPose.y + rectanglesHeight - rectanglesWidth / 13)
-                    c.moveTo(item.x + transPose.x + rectanglesWidth / 2, item.y + transPose.y + rectanglesHeight)
-                    c.lineTo(item.x + transPose.x + rectanglesWidth / 2 - rectanglesHeight / 6 + (rectanglesWidth / 7), item.y + transPose.y + rectanglesHeight - rectanglesWidth / 13)
-
                     c.stroke()
                 }
+
                 c.font = `${item.data.child.length <= 5 ? namesSize : namesSize / (item.data.child.length / 6)}px Arial`;
                 c.fillStyle = 'black'
                 c.textAlign = 'center'
                 c.fillText(item.data.child, item.x + rectanglesWidth / 2 + transPose.x, item.y + (rectanglesHeight / 1.5) + transPose.y);
                 //link Line
+
                 let link = networkDataLinks.current
                 link.forEach(link => {
                     c.beginPath()
                     c.moveTo(link.source.x + 35, link.source.y + 30)
                     c.stroke();
-                    let p = new Path2D(`M ${link.source.x + transPose.x + rectanglesWidth / 2},${link.source.y + transPose.y + rectanglesHeight} C ${link.source.x + transPose.x + rectanglesWidth / 2},${(link.source.y + transPose.y + link.target.y + transPose.y) / 2} ${link.target.x + transPose.x + rectanglesWidth / 2},${(link.source.y + transPose.y + link.target.y + transPose.y) / 2} ${link.target.x + transPose.x + rectanglesWidth / 2},${link.target.y + transPose.y}`);
+                    let p = new Path2D(`M ${link.source.x + transPose.x + rectanglesWidth / 2} ${link.source.y + transPose.y + rectanglesHeight} C ${link.source.x + transPose.x + rectanglesWidth / 2},${(link.source.y + transPose.y + link.target.y + transPose.y) / 2} ${link.target.x + transPose.x + rectanglesWidth / 2},${(link.source.y + transPose.y + link.target.y + transPose.y) / 2} ${link.target.x + transPose.x + rectanglesWidth / 2},${link.target.y + transPose.y - rectanglesWidth / 9}`);
                     c.strokeStyle = '#b7b7b7'
                     c.stroke(p);
                 })
+                c.drawImage(document.getElementById('noAv'), item.x + transPose.x + rectanglesWidth / 2.5, item.y + transPose.y - rectanglesHeight / 3, rectanglesWidth / 5, rectanglesWidth / 5)
+
+
             }
 
         })
@@ -214,7 +219,25 @@ const Diagram = () => {
     }
 
     return (
-        <div className={'w-100 position-relative'} id={'container'}>
+        <div style={{
+            overflow: 'hidden'
+        }} className={'w-100 h-100 position-relative'} id={'container'}>
+            <div style={{
+                zIndex: 9,
+                transition: '.3s ease',
+                background: diagramLoading ? "rgba(0,0,0,0.7)" : "rgba(0,0,0,0)",
+                display: diagramLoading ? 'flex' : 'none'
+            }}
+                 className={'diagram-loading-container vh-100 vw-100 position-absolute flex-column justify-content-center align-items-center '}>
+                <GridSpinner size={50} color={'white'}/>
+                <span className={'IranSans text-white mt-5'}>در حال دریافت اظلاعات</span>
+            </div>
+
+            <img id={'noAv'} style={{
+                width: 0,
+                height: 0
+            }} src="/svg/noAvatar.svg" alt="noAvatar"/>
+
             <canvas onClick={(e) => {
                 e.preventDefault()
                 let data = networkData.current
@@ -222,27 +245,48 @@ const Diagram = () => {
                     if (isMouseOverMe(e, item)) {
                         if (!expendedSubnets.includes(item.data.child)) {
                             expendedSubnets.push(item.data.child)
-                            updateTree(mainData)
+                            updateTree(mainData.current)
                         } else {
                             expendedSubnets = expendedSubnets.filter(eachItem => {
                                 return eachItem !== item.data.child
                             })
-                            updateTree(mainData)
+                            updateTree(mainData.current)
                         }
                     }
                 })
-
-            }} onMouseMove={(e) => {
-                if (mouseDown) {
-                    drag.x = e.clientX - dragStart.x + offset.x;
-                    drag.y = e.clientY - dragStart.y + offset.y;
-                    transPose = {
-                        x: e.clientX - dragStart.x + offset.x,
-                        y: e.clientY - dragStart.y + offset.y,
-                    }
-                    drawInformation(1, transPose)
-                }
             }}
+                    onTouchMove={(e) => {
+                        if (mouseDown) {
+                            drag.x = e.targetTouches[0].clientX - dragStart.x + offset.x;
+                            drag.y = e.targetTouches[0].clientY - dragStart.y + offset.y;
+                            transPose = {
+                                x: e.targetTouches[0].clientX - dragStart.x + offset.x,
+                                y: e.targetTouches[0].clientY - dragStart.y + offset.y,
+                            }
+                            drawInformation(1, transPose)
+                        }
+                    }}
+                    onMouseMove={(e) => {
+                        if (mouseDown) {
+                            drag.x = e.clientX - dragStart.x + offset.x;
+                            drag.y = e.clientY - dragStart.y + offset.y;
+                            transPose = {
+                                x: e.clientX - dragStart.x + offset.x,
+                                y: e.clientY - dragStart.y + offset.y,
+                            }
+                            drawInformation(1, transPose)
+                        }
+                    }}
+
+                    onTouchStart={(e) => {
+                        let data = networkData.current
+                        data.forEach(item => {
+                            isMouseOverMe(e, item)
+                        })
+                        mouseDown = true;
+                        dragStart.x = e.targetTouches[0].clientX;
+                        dragStart.y = e.targetTouches[0].clientY;
+                    }}
                     onMouseDown={(e) => {
                         let data = networkData.current
                         data.forEach(item => {
@@ -252,6 +296,12 @@ const Diagram = () => {
                         dragStart.x = e.clientX;
                         dragStart.y = e.clientY;
                     }}
+                    onTouchEnd={(e) => {
+                        mouseDown = false;
+                        offset.x += e.changedTouches[0].clientX - dragStart.x
+                        offset.y += e.changedTouches[0].clientY - dragStart.y
+                    }}
+
                     onMouseUp={(e) => {
                         mouseDown = false;
                         offset.x += e.clientX - dragStart.x
@@ -262,10 +312,6 @@ const Diagram = () => {
                     }}
                     className={'canv'} width={1500} height={700}>
             </canvas>
-            <button onClick={() => {
-                drawInformation(scale, dragStart)
-            }}>Draw Something...
-            </button>
             <ButtonBase className={'shadow-sm'} style={{
                 outline: 'none',
                 background: 'white',
@@ -283,7 +329,7 @@ const Diagram = () => {
                 rectanglesHeight /= 1 - zoomMultiplier;
                 rectanglesWidth /= 1 - zoomMultiplier;
                 namesSize /= 1 - zoomMultiplier;
-                updateTree(mainData)
+                updateTree(mainData.current)
             }}
             >
                 <i className={'fa fa-plus'}/>
@@ -305,7 +351,7 @@ const Diagram = () => {
                 rectanglesHeight /= zoomMultiplier + 1;
                 rectanglesWidth /= zoomMultiplier + 1;
                 namesSize /= zoomMultiplier + 1;
-                updateTree(mainData)
+                updateTree(mainData.current)
                 // drawInformation(1, transPose)
             }}
             >

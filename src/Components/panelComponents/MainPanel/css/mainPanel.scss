@@ -136,3 +136,14 @@
     width: 95%;
   }
 }
+.Toastify__toast-body{
+  div{
+    font-family: IranSans,Serif;
+  }
+}
+
+body{
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}

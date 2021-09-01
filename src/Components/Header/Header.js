@@ -30,7 +30,7 @@ const Header = (props) => {
     }
     return (
         <div className={'main-header d-flex flex-row justify-content-center'}>
-            <div className={'user-options'}/>
+            {/*<div className={'user-options'}/>*/}
             <div className={'left-side-header header-sides w-50 justify-content-end'}>
                 <div onClick={()=>{
                 }} className={'IranSansLight user-name-panel d-flex flex-row align-items-center'}>

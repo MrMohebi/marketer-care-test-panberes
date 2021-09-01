@@ -27,12 +27,10 @@ const NewOrder = (props) => {
         let token = externalFunctions.getToken();
         let customerId = props.currentCustomerInfo['id'];
 
-        console.log(customerOrderList)
         queries.createCustomerOrder(token, customerId,customerOrderList, createOrderCallback)
         setOrderSubmitting(true)
     }
     let createOrderCallback = (res) => {
-        console.log(res)
         setCustomerOrderList([])
         setOrderSubmitting(false)
 

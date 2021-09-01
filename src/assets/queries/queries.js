@@ -28,7 +28,6 @@ query{
 }
 
 let getUserData = (token, callbackFunction) => {
-    console.log(token)
     let query = `
 query{
   user(token:"${token}"){
@@ -116,7 +115,7 @@ mutation{
 
 
 }
-let NewCustomer = (token, name, age, addressText, phone, gender, maritalStatus,callback) => {
+let NewCustomer = (token, name, age, addressText, phone, gender, maritalStatus, callback) => {
     let query = `
 mutation{
   createCustomer(
@@ -151,7 +150,7 @@ mutation{
 
 }
 
-let getCustomers = (token,callback) => {
+let getCustomers = (token, callback) => {
     let query = `
 query{
   customers(
@@ -185,7 +184,7 @@ query{
 }
 
 
-let createCustomerOrder = (token,customerId,items,callback) => {
+let createCustomerOrder = (token, customerId, items, callback) => {
     let query = `
 mutation{
   createCustomerOrder(
@@ -215,4 +214,77 @@ mutation{
 
 
 }
-export {loginQuery, getUserData, changeUserInfo, signUp,NewCustomer,getCustomers,createCustomerOrder}
+
+let getSubsets = (token, id, callback) => {
+    let query = `
+query{
+  subsets(
+    token:"${token}",
+    id:"${id}"
+  )
+  {
+  name
+  subsets{
+  name
+  }
+}
+
+`
+    try {
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            callback(res)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+}
+let firstTimeSubset = (token, callback) => {
+    console.log('inside')
+    let query = `
+query{
+  user(
+    token:"${token}",
+  )
+  {
+  name
+  subsets{
+  name
+  id
+  }
+}
+}
+
+`
+    try {
+        console.log('inner')
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            callback(res)
+        })
+    } catch (e) {
+    }
+}
+export {
+    loginQuery,
+    getUserData,
+    changeUserInfo,
+    signUp,
+    NewCustomer,
+    getCustomers,
+    createCustomerOrder,
+    getSubsets,
+    firstTimeSubset
+}

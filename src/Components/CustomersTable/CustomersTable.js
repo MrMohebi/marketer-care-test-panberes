@@ -79,7 +79,6 @@ const CustomersTable = (props) => {
             let customers = res['data']['customers'].map((eachCustomer, index) => {
                 return (
                     <tr key={eachCustomer['id']} onClick={() => {
-                        console.log(eachCustomer['id'])
                         setCurrentCustomerInfo({
                             name: eachCustomer['name'],
                             age: eachCustomer['age'],

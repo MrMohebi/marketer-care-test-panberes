@@ -132,6 +132,8 @@ const NewCustomerDialog = (props) => {
                     outline: 'none',
                     height: '40px',
                     color: 'white',
+                    marginBottom:'20',
+                    minHeight:40,
                     backgroundColor: '#0c0cb2'
                 }}>
                     ثبت مشتری جدید

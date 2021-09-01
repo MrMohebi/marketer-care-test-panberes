@@ -8,14 +8,23 @@
 
 .newCustomerPopUp {
   padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
   max-width: 400px;
   height: 90%;
   max-height: 600px;
-  overflow: scroll;
+  overflow-y: scroll;
   background: white;
   border-radius: 5px;
   padding-top: 20px;
+  padding-bottom: 20px;
+}
+.newCustomerPopUp::-webkit-scrollbar {
+  display: none;
+  width: 5px;
+}
+.newCustomerPopUp::-webkit-scrollbar-thumb {
+  width: 5px;
 }
 .newCustomerPopUp input::-webkit-inner-spin-button, .newCustomerPopUp input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -49,7 +58,7 @@
   user-select: none;
   position: relative;
   margin-top: 25px;
-  height: 35px;
+  min-height: 35px;
   border: solid 1px #dadadd;
   border-radius: 10px;
   overflow: hidden;
@@ -104,11 +113,6 @@
     height: 100%;
     max-height: 100%;
   }
-
-  .submitNewCustomer {
-    position: absolute !important;
-    bottom: 20px;
-  }
 }
 .swal2-container {
   z-index: 999999;
@@ -117,6 +121,10 @@
 .MuiChip-label {
   font-family: IranSans, Serif;
   padding-top: 5px;
+}
+
+#customerAddressText {
+  min-height: 50px;
 }
 
 /*# sourceMappingURL=NewCustomerDialog.css.map */

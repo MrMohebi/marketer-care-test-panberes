@@ -1,0 +1,13 @@
+.each-tutorial-section .each-tutorial-body {
+  overflow: hidden;
+}
+
+i {
+  transition: 0.2s ease;
+}
+
+.tutorial-open i.angle {
+  transform: rotate(180deg);
+}
+
+/*# sourceMappingURL=Tutorials.css.map */

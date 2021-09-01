@@ -8,6 +8,7 @@ import MainPanel from "../panelComponents/MainPanel/MainPanel";
 import UserInfoPanel from "../panelComponents/UserInfoPanel/UserInfoPanel";
 import Customers from "../panelComponents/Customers/Customers";
 import Diagram from "../panelComponents/Diagram/Diagram";
+import Tutorials from "../panelComponents/Tutorials/Tutorials";
 
 let queries = require('../../assets/queries/queries')
 
@@ -22,7 +23,8 @@ const MainPage = () => {
         <MainPanel setUserData={setUserData}/>,
         <UserInfoPanel userData={userData} token={token}/>,
         <Customers token={token}/>,
-        <Diagram />
+        <Diagram userData={userData} />,
+        <Tutorials/>
     ]
     let history = useHistory()
     let [currentComponent, setCurrentComponent] = React.useState(0)

@@ -92,7 +92,6 @@ const IndexPage = () => {
         }
     }
     let checkLogin = (res) => {
-        console.log(res)
         setLoginLoading(false)
         setLoginButtonDisabled(false)
         if (res['errors']) {
@@ -161,8 +160,6 @@ const IndexPage = () => {
     }
 
     let signUpCallback = (res) => {
-        console.log(res)
-        console.log('was res')
         if (res['errors']) {
             swal.fire({
                 icon: 'error',
@@ -408,14 +405,14 @@ const IndexPage = () => {
                                 </form>
                             </div>
                         </div>
-                        <div className={' right-side pt-4 ml-5'}>
+                        <div className={' right-side pt-4 '}>
                             {
                                 infoBoxes.map(eachOption => {
                                     return (
                                         <div style={{direction: 'rtl'}}
                                              className={'info-block d-flex align-items-center '}>
                                             <i style={{fontSize: '1.8rem'}}
-                                               className={eachOption['FAClass'] + ' ml-3'}/>
+                                               className={eachOption['FAClass'] + ' ml-3 mb-2'}/>
                                             <div className={'text-right d-flex flex-column '}>
                                                 <h4 className={'info-block-title IranSans pt-1'}>
                                                     {eachOption['title']}

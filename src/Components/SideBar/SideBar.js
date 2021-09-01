@@ -22,7 +22,6 @@ const SideBar = (props) => {
                 component: 3
             },
             {
-
                 title: 'مشتریان',
                 iconClass: 'fas fa-user',
                 subnets: [
@@ -30,43 +29,12 @@ const SideBar = (props) => {
                         "لیست مشتریان ",
                         2
                     ],
-                    [
-                        "فرم های مشاوره",
-                        '/login'
-                    ],
                 ]
             },
             {
-
-                title: 'ابزار های مدیریتی',
-                iconClass: 'fas fa-cogs',
-                subnets: [
-                    [
-                        "لیست مشتریان ",
-                        'login'
-                    ],
-                    [
-                        "فرم های مشاوره",
-                        'login'
-                    ],
-
-
-                ]
-            },
-            {
-                title: 'فعالسازی فرم مشاوره',
-                iconClass: 'far fa-file-alt',
-                component: 'local'
-            },
-            {
-                title: 'ثبت نام در سمینار',
-                iconClass: 'far fa-gem',
-                component: 'local'
-            },
-            {
-                title: 'دانلود ها',
+                title: 'آموزش ها',
                 iconClass: 'fas fa-download',
-                component: 'local'
+                component: 4
             },
             {
                 title: 'خروج',
