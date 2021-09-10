@@ -95,7 +95,7 @@
   right: 25px;
 }
 
-@media all and (max-width: 400px) {
+@media all and (max-width: 500px) {
   .side-bar-main-container {
     position: fixed;
     right: 0;

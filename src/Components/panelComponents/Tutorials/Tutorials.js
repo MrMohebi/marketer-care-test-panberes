@@ -169,7 +169,6 @@ const Tutorials = () => {
                 ]
             },
 
-
         ]
 
         return (

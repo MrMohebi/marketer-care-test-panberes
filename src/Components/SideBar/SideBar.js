@@ -22,6 +22,11 @@ const SideBar = (props) => {
                 component: 3
             },
             {
+                title: 'فرم های مشاوره',
+                iconClass: 'fa fa-users',
+                component: 5
+            },
+            {
                 title: 'مشتریان',
                 iconClass: 'fas fa-user',
                 subnets: [
