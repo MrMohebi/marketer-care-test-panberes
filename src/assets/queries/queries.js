@@ -1,7 +1,30 @@
 import $ from 'jquery'
 
-const API_URL = "https://api.shcare.ir/panberes/public/graphql";
+const API_URL = "https://api-panberes.devmrm.ir/graphql";
 
+let getUserLinks = (token,callback)=>{
+let query=`
+query{
+links(
+token:"${token}"
+){
+code
+age 
+name
+}
+}`
+    $.ajax({
+        url: API_URL,
+        contentType: 'application/json',
+        type: 'POST',
+        data: JSON.stringify({
+            query: query
+        })
+    }).then((res) => {
+        callback(res)
+    })
+
+}
 let loginQuery = (username, password, callBackFunction) => {
     let query = `
 query{
@@ -277,6 +300,41 @@ query{
     } catch (e) {
     }
 }
+
+let createLink = (token,name,age,addressText,phone,gender,maritalStatus,isEditable)=>{
+
+    let query = `
+mutation{
+  createLink(
+    token:"${token}"
+    name:"${name}"
+    age:${age}
+    addressText:"${addressText}"
+    phone:"${phone}"
+    gender:"${gender}"
+    maritalStatus:"${maritalStatus}"
+    isEditable:${isEditable}
+  ){
+  code
+  }
+}
+
+`
+    try {
+        console.log('inner')
+        $.ajax({
+            url: API_URL,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify({
+                query: query
+            })
+        }).then((res) => {
+            console.log(res)
+        })
+    } catch (e) {
+    }
+}
 export {
     loginQuery,
     getUserData,
@@ -286,5 +344,7 @@ export {
     getCustomers,
     createCustomerOrder,
     getSubsets,
-    firstTimeSubset
+    firstTimeSubset,
+    createLink,
+    getUserLinks
 }
