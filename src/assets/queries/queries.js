@@ -1,9 +1,41 @@
 import $ from 'jquery'
+import {getToken} from "../externalFunctions";
 
 const API_URL = "https://api-panberes.devmrm.ir/graphql";
 
-let getUserLinks = (token,callback)=>{
-let query=`
+let getTutorials = (callback) => {
+    let query = `
+    query{
+  tutorials{
+    id 
+    requirement
+    order
+    description
+    logo
+    group
+    groupOrder
+    link
+    links
+    watchTimes
+    length
+    deadline
+  }
+}
+    `
+    $.ajax({
+        url: API_URL,
+        contentType: 'application/json',
+        type: 'POST',
+        data: JSON.stringify({
+            query: query
+        })
+    }).then((res) => {
+        console.log(res)
+        callback(res)
+    })
+}
+let getUserLinks = (token, callback) => {
+    let query = `
 query{
 links(
 token:"${token}"
@@ -11,6 +43,12 @@ token:"${token}"
 code
 age 
 name
+testResult{
+faceAndNeckSkin
+hairAndHeadSkin
+bodySkin
+
+}
 }
 }`
     $.ajax({
@@ -21,6 +59,7 @@ name
             query: query
         })
     }).then((res) => {
+        console.log(res)
         callback(res)
     })
 
@@ -49,7 +88,29 @@ query{
 
 
 }
+let addTutorialToWatched = (id,callbackFunction)=> {
+    let token = getToken()
+    let query = `mutation{
+addTutorialToWatched(
+token: "${token}"
+tutorialId: "${id}"
+){
+  watchedTutorialsId
+}
+}
+`
 
+    $.ajax({
+        url: API_URL,
+        contentType: 'application/json',
+        type: 'POST',
+        data: JSON.stringify({
+            query: query
+        })
+    }).then((res) => {
+        callbackFunction(res['data']['addTutorialToWatched'])
+    })
+}
 let getUserData = (token, callbackFunction) => {
     let query = `
 query{
@@ -61,6 +122,7 @@ query{
     phone
     email
     rank
+    watchedTutorialsId
   }
 }
 `
@@ -72,6 +134,7 @@ query{
             query: query
         })
     }).then((res) => {
+        console.log(res)
         callbackFunction(res)
     })
 }
@@ -301,7 +364,7 @@ query{
     }
 }
 
-let createLink = (token,name,age,addressText,phone,gender,maritalStatus,isEditable)=>{
+let createLink = (token, name, age, addressText, phone, gender, maritalStatus, isEditable) => {
 
     let query = `
 mutation{
@@ -346,5 +409,7 @@ export {
     getSubsets,
     firstTimeSubset,
     createLink,
-    getUserLinks
+    getUserLinks,
+    getTutorials,
+    addTutorialToWatched
 }

@@ -37,6 +37,7 @@ const MainPage = () => {
             return <Redirect to={'/'}/>
         } else {
             setUserData(e['data']['user'])
+            window.sessionStorage.setItem('watchedTutorialsId',JSON.stringify(e['data']['user']['watchedTutorialsId']))
         }
     }
     useEffect(() => {

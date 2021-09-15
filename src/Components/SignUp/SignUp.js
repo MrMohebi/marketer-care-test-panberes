@@ -66,12 +66,7 @@ const IndexPage = () => {
         if (externalFunctions.getToken()){
             history.push("/panel");
         }
-        // tippy('[data-tippy-content]', {
-        //     animation: 'scale-subtle',
-        //     arrow: true,
-        //     trigger: 'focus',
-        //     placement: 'bottom',
-        // })
+
     }, [])
 
     let loginClickHandler = (e, username, password) => {

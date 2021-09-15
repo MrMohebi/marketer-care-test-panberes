@@ -88,16 +88,6 @@ const Diagram = (props) => {
             canvas.height = canvasContainer.clientHeight;
         })
         initQuery()
-
-        // queries.getSubsets(4,getToken(),(res)=>{
-        //     res.data.user['subsets'].forEach(item=>{
-        //         if (item['subset']){
-        //
-        //         }
-        //         mainData.current.push({parent: props.userData.name,child:item.name})
-        //
-        //     })
-        // })
         updateTree(mainData.current)
     }, [])
 

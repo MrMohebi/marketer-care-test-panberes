@@ -125,7 +125,6 @@ const NewCustomerDialog = (props) => {
                     submitNewCustomer()
                 }} className={'IranSans submitNewCustomer'} style={{
                     width: '90%',
-                    // border:'2px solid blue',
                     borderRadius: '5px',
                     marginTop: '30px',
                     paddingTop: '5px',

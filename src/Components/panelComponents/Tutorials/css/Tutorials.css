@@ -10,4 +10,13 @@ i {
   transform: rotate(180deg);
 }
 
+.checkbox-holder {
+  transition: 0.3s ease;
+  overflow: hidden;
+  border: #e3e3e3 solid 1px;
+}
+.checkbox-holder:hover {
+  box-shadow: #c7c7c7 0px 0px 5px;
+}
+
 /*# sourceMappingURL=Tutorials.css.map */
