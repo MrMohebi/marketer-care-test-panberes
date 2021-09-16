@@ -30,7 +30,6 @@ let getTutorials = (callback) => {
             query: query
         })
     }).then((res) => {
-        console.log(res)
         callback(res)
     })
 }
@@ -59,7 +58,6 @@ bodySkin
             query: query
         })
     }).then((res) => {
-        console.log(res)
         callback(res)
     })
 
@@ -88,7 +86,7 @@ query{
 
 
 }
-let addTutorialToWatched = (id,callbackFunction)=> {
+let addTutorialToWatched = (id, callbackFunction) => {
     let token = getToken()
     let query = `mutation{
 addTutorialToWatched(
@@ -134,7 +132,9 @@ query{
             query: query
         })
     }).then((res) => {
+        console.log('user data:')
         console.log(res)
+        window.sessionStorage.setItem('userData',JSON.stringify(res['data']['user']))
         callbackFunction(res)
     })
 }
@@ -162,6 +162,7 @@ mutation{
             query: query
         })
     }).then((res) => {
+        window.sessionStorage.setItem('userData', JSON.stringify(res))
         callback(res)
     })
 }
@@ -196,7 +197,6 @@ mutation{
             callback(res)
         })
     } catch (e) {
-        console.log(e)
     }
 
 
@@ -230,7 +230,6 @@ mutation{
             callback(res)
         })
     } catch (e) {
-        console.log(e)
     }
 
 
@@ -263,7 +262,6 @@ query{
             callback(res)
         })
     } catch (e) {
-        console.log(e)
     }
 
 
@@ -295,7 +293,6 @@ mutation{
             callback(res)
         })
     } catch (e) {
-        console.log(e)
     }
 
 
@@ -328,11 +325,9 @@ query{
             callback(res)
         })
     } catch (e) {
-        console.log(e)
     }
 }
 let firstTimeSubset = (token, callback) => {
-    console.log('inside')
     let query = `
 query{
   user(
@@ -349,7 +344,6 @@ query{
 
 `
     try {
-        console.log('inner')
         $.ajax({
             url: API_URL,
             contentType: 'application/json',
@@ -384,7 +378,6 @@ mutation{
 
 `
     try {
-        console.log('inner')
         $.ajax({
             url: API_URL,
             contentType: 'application/json',
@@ -392,8 +385,7 @@ mutation{
             data: JSON.stringify({
                 query: query
             })
-        }).then((res) => {
-            console.log(res)
+        }).then(() => {
         })
     } catch (e) {
     }

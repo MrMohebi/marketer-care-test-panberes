@@ -14,7 +14,7 @@ const MainPanel = (props) => {
     useEffect(() => {
         queries.getUserData(getToken(), (data) => {
             linkRef.current.value = data;
-            linkRef.current.value = "https://schcare.ir/" + (data.data.user.phone)
+            linkRef.current.value = "https://schcare.ir/" + (data.data.user.uid)
             props.setUserData(data.data.user)
         })
     }, [])

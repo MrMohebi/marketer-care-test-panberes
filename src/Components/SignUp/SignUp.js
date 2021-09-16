@@ -134,7 +134,7 @@ const IndexPage = () => {
                         title: 'لطفا مجددا تلاش کنید',
                         text: 'حد اقل کارکتر مجاز برای پسورد 8 کارکتر میباشد',
                         confirmButtonText: 'تایید'
-                    })
+                    }).then()
                 }
             } else {
                 swal.fire({
@@ -142,7 +142,7 @@ const IndexPage = () => {
                     title: 'لطفا مجددا تلاش کنید',
                     text: 'شماره تلفن را به صورت 11 رقمی وارد کنید',
                     confirmButtonText: 'تایید'
-                })
+                }).then()
             }
         } else {
             swal.fire({
@@ -192,7 +192,7 @@ const IndexPage = () => {
                         </li>
                     </ul>
                     <ul className={'float-right '}>
-                        <li><a href="">سوالات متداول</a></li>
+                        <li><a href="/questions">سوالات متداول</a></li>
                     </ul>
                 </div>
             </div>
@@ -205,7 +205,7 @@ const IndexPage = () => {
                                 <div className={' LS-form-header'}>
                                     <img className={'form-img'} src={`/img/logo.png`} alt=""/>
                                 </div>
-                                <form action="POST" onSubmit={(e)=>{
+                                <form onSubmit={(e)=>{
                                 e.preventDefault()
                                 }}>
 
@@ -369,7 +369,7 @@ const IndexPage = () => {
                                                        htmlFor={'conditions'}>
                                             <span>
                                                 با
-                                                <a href=""> شرایط و قوانین </a>
+                                                <a href="/rules"> شرایط و قوانین </a>
                                             موافقم
                                             </span>
                                                 </label>
