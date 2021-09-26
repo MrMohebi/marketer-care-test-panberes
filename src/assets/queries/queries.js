@@ -56,9 +56,11 @@ bodySkin
         type: 'POST',
         data: JSON.stringify({
             query: query
-        })
-    }).then((res) => {
-        callback(res)
+        }),
+        success:(res)=>{
+            console.log(res)
+            callback(res)
+        }
     })
 
 }
